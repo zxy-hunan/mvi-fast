@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:label="MVI Demo"
+        android:theme="@style/Theme.MaterialComponents.Light">
+
+        <activity
+            android:name=".ui.DemoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 缺省页示例 -->
+        <activity
+            android:name=".ui.EmptyStateDemoActivity"
+            android:exported="false" />
+
+        <!-- 骨架屏示例 -->
+        <activity
+            android:name=".ui.SkeletonDemoActivity"
+            android:exported="false" />
+
+        <!-- 综合示例 -->
+        <activity
+            android:name=".ui.ComprehensiveDemoActivity"
+            android:exported="false" />
+
+        <!-- Dialog 示例 -->
+        <activity
+            android:name=".ui.DialogDemoActivity"
+            android:exported="false" />
+
+        <!-- MviUi 用户列表示例 -->
+        <activity
+            android:name=".ui.UserListActivity"
+            android:exported="false"
+            android:label="MviUi 示例" />
+
+    </application>
+
+</manifest>

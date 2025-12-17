@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.mvi.demo'
+    compileSdk rootProject.ext.versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.mvi.demo"
+        minSdk rootProject.ext.versions.minSdk
+        targetSdk rootProject.ext.versions.targetSdk
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.versions.javaVersion
+        targetCompatibility rootProject.ext.versions.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.versions.jvmTarget
+    }
+
+    viewBinding.enabled = true
+}
+
+dependencies {
+    // 依赖 mvi-ui 模块(会自动包含 mvi-core)
+    implementation project(':mvi-ui')
+}

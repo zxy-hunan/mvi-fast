@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Network Exceptions -->
+    <string name="error_network_connection">Network connection failed, please check your network settings</string>
+    <string name="error_network_timeout">Network connection timeout, please try again later</string>
+    <string name="error_socket_exception">Network connection exception</string>
+
+    <!-- HTTP Status Codes -->
+    <string name="error_http_unauthorized">Unauthorized, please login again</string>
+    <string name="error_http_forbidden">Access denied</string>
+    <string name="error_http_not_found">Resource not found</string>
+    <string name="error_http_timeout">Request timeout, please try again later</string>
+    <string name="error_http_internal_error">Internal server error</string>
+    <string name="error_http_bad_gateway">Bad gateway</string>
+    <string name="error_http_unavailable">Service unavailable, please try again later</string>
+    <string name="error_http_gateway_timeout">Gateway timeout</string>
+    <string name="error_http_unknown">HTTP error (%d)</string>
+
+    <!-- Data Parsing -->
+    <string name="error_json_parse">Data parsing failed</string>
+
+    <!-- IO Exception -->
+    <string name="error_io_exception">IO exception</string>
+
+    <!-- Other Exceptions -->
+    <string name="error_null_pointer">Null pointer exception</string>
+    <string name="error_index_out_of_bounds">Index out of bounds exception</string>
+    <string name="error_class_cast">Class cast exception</string>
+    <string name="error_array_store">Array store exception</string>
+    <string name="error_illegal_argument">Invalid parameter</string>
+    <string name="error_unknown">Unknown error</string>
+
+    <!-- RetrofitClient -->
+    <string name="retrofit_init_required">Please call RetrofitClient.init() first</string>
+    <string name="retrofit_baseurl_required">baseUrl cannot be empty</string>
+
+    <!-- File Upload and Download -->
+    <string name="upload_progress">Uploading %d%%</string>
+    <string name="upload_success">Upload successful</string>
+    <string name="upload_failed">Upload failed</string>
+    <string name="download_progress">Downloading %d%%</string>
+    <string name="download_success">Download completed</string>
+    <string name="download_failed">Download failed</string>
+    <string name="download_cancelled">Download cancelled</string>
+
+    <!-- Permissions -->
+    <string name="permission_denied_title">Permission Denied</string>
+    <string name="permission_denied_message">The following permissions have been permanently denied and need to be granted manually:\n%s</string>
+    <string name="permission_go_settings">Go to Settings</string>
+    <string name="permission_cancel">Cancel</string>
+    <string name="permission_storage_read">Read Storage</string>
+    <string name="permission_storage_write">Write Storage</string>
+    <string name="permission_media_images">Read Images</string>
+    <string name="permission_media_video">Read Video</string>
+    <string name="permission_media_audio">Read Audio</string>
+    <string name="permission_camera">Camera</string>
+    <string name="permission_location">Location</string>
+    <string name="permission_location_fine">Precise Location</string>
+    <string name="permission_location_coarse">Approximate Location</string>
+    <string name="permission_microphone">Microphone</string>
+    <string name="permission_contacts">Contacts</string>
+    <string name="permission_phone">Phone</string>
+    <string name="permission_calendar">Calendar</string>
+    <string name="permission_sms">SMS</string>
+    <string name="permission_sensors">Body Sensors</string>
+    <string name="permission_notification">Notification</string>
+</resources>

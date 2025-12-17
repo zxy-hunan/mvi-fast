@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:titleTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MviDialog 示例"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="展示如何使用 MviDialog 基类创建各种对话框"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 确认对话框 -->
+            <Button
+                android:id="@+id/btnShowConfirmDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确认对话框"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviCenterDialog，居中显示，带确认和取消按钮"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 输入对话框 -->
+            <Button
+                android:id="@+id/btnShowInputDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="输入对话框"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="带输入框的对话框，可以获取用户输入"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 列表对话框 -->
+            <Button
+                android:id="@+id/btnShowListDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="列表对话框"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviBottomDialog，从底部弹出，支持下滑关闭"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 底部对话框 -->
+            <Button
+                android:id="@+id/btnShowBottomDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="底部对话框（分享）"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="底部弹出的分享菜单示例"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 不可关闭对话框 -->
+            <Button
+                android:id="@+id/btnShowNonCancelableDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="不可关闭对话框"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="演示如何创建不能通过点击外部或返回键关闭的对话框"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 分隔标题 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="函数式用法（类似 AssetDialog）"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviDialog.showCenter() 和 MviDialog.showBottom() 方法，类似于你项目中的用法"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 函数式方式 - 居中对话框 -->
+            <Button
+                android:id="@+id/btnShowFunctionalCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="函数式对话框（居中）"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviDialog.showCenter() 创建，无需继承"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- 函数式方式 - 底部对话框 -->
+            <Button
+                android:id="@+id/btnShowFunctionalBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="函数式对话框（底部）"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviDialog.showBottom() 创建，完全兼容你项目中的用法"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 分隔标题 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ViewModel 集成示例"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="使用 MviViewModelDialog 创建带 ViewModel 的对话框，完整 MVI 架构"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+            <!-- ViewModel 对话框 -->
+            <Button
+                android:id="@+id/btnShowViewModelDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ViewModel 对话框（用户信息）"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="演示如何在 Dialog 中安全使用 ViewModel，包含数据加载、表单验证和保存"
+                android:textSize="12sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

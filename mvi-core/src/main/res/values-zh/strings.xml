@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 网络异常相关 -->
+    <string name="error_network_connection">网络连接失败，请检查网络设置</string>
+    <string name="error_network_timeout">网络连接超时，请稍后重试</string>
+    <string name="error_socket_exception">网络连接异常</string>
+
+    <!-- HTTP 状态码相关 -->
+    <string name="error_http_unauthorized">未授权，请重新登录</string>
+    <string name="error_http_forbidden">禁止访问</string>
+    <string name="error_http_not_found">请求的资源不存在</string>
+    <string name="error_http_timeout">请求超时，请稍后重试</string>
+    <string name="error_http_internal_error">服务器内部错误</string>
+    <string name="error_http_bad_gateway">网关错误</string>
+    <string name="error_http_unavailable">服务不可用，请稍后重试</string>
+    <string name="error_http_gateway_timeout">网关超时</string>
+    <string name="error_http_unknown">HTTP错误 (%d)</string>
+
+    <!-- 数据解析相关 -->
+    <string name="error_json_parse">数据解析失败</string>
+
+    <!-- IO 异常 -->
+    <string name="error_io_exception">IO异常</string>
+
+    <!-- 其他异常 -->
+    <string name="error_null_pointer">空指针异常</string>
+    <string name="error_index_out_of_bounds">数组越界异常</string>
+    <string name="error_class_cast">类型转换异常</string>
+    <string name="error_array_store">数组存储异常</string>
+    <string name="error_illegal_argument">参数错误</string>
+    <string name="error_unknown">未知错误</string>
+
+    <!-- RetrofitClient 相关 -->
+    <string name="retrofit_init_required">请先调用 RetrofitClient.init() 初始化</string>
+    <string name="retrofit_baseurl_required">baseUrl不能为空</string>
+
+    <!-- 文件上传下载相关 -->
+    <string name="upload_progress">上传中 %d%%</string>
+    <string name="upload_success">上传成功</string>
+    <string name="upload_failed">上传失败</string>
+    <string name="download_progress">下载中 %d%%</string>
+    <string name="download_success">下载完成</string>
+    <string name="download_failed">下载失败</string>
+    <string name="download_cancelled">下载已取消</string>
+
+    <!-- 权限相关 -->
+    <string name="permission_denied_title">权限被拒绝</string>
+    <string name="permission_denied_message">以下权限被永久拒绝，需要手动授权：\n%s</string>
+    <string name="permission_go_settings">去设置</string>
+    <string name="permission_cancel">取消</string>
+    <string name="permission_storage_read">读取存储</string>
+    <string name="permission_storage_write">写入存储</string>
+    <string name="permission_media_images">读取图片</string>
+    <string name="permission_media_video">读取视频</string>
+    <string name="permission_media_audio">读取音频</string>
+    <string name="permission_camera">相机</string>
+    <string name="permission_location">位置信息</string>
+    <string name="permission_location_fine">精确位置</string>
+    <string name="permission_location_coarse">大致位置</string>
+    <string name="permission_microphone">麦克风</string>
+    <string name="permission_contacts">通讯录</string>
+    <string name="permission_phone">电话</string>
+    <string name="permission_calendar">日历</string>
+    <string name="permission_sms">短信</string>
+    <string name="permission_sensors">身体传感器</string>
+    <string name="permission_notification">通知</string>
+</resources>

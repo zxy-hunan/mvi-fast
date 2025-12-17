@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Empty State (缺省页相关) -->
+    <string name="empty_state_loading">Loading…</string>
+    <string name="empty_state_no_data">No data</string>
+    <string name="empty_state_load_failed">Load failed</string>
+    <string name="empty_state_network_error">Network connection failed</string>
+    <string name="empty_state_retry">Retry</string>
+    <string name="empty_state_reload">Reload</string>
+</resources>

@@ -1,0 +1,114 @@
+ext {
+    versions = [
+            compileSdk        : 35,
+            buildTools        : "34.0.0",
+            minSdk            : 23,
+            targetSdk         : 35,
+            javaVersion       : JavaVersion.VERSION_17,
+            jvmTarget         : 17,
+    ]
+
+    libs = [
+            // Kotlin
+            kotlinStdlib              : "1.8.20",
+            coreKtx                   : "1.9.0",
+
+            // AndroidX
+            appcompat                 : "1.6.1",
+            lifecycle                 : "2.6.1",
+            constraintlayout          : "2.1.4",
+            recyclerview              : "1.3.0",
+            swiperefreshlayout        : "1.1.0",
+            material                  : "1.9.0",
+
+            // Coroutines
+            coroutines                : "1.7.3",
+
+            // Network
+            retrofit                  : "2.9.0",
+            okhttp                    : "4.11.0",
+            kotlinxSerialization      : "1.6.0",
+
+            // Storage
+            mmkv                      : "2.0.1",
+            mmkvKtx                   : "1.2.14",
+
+            // Image
+            glide                     : "4.15.1",
+
+            // UI
+            viewbinding               : "2.1.0",
+            loadingStateView          : "5.0.0",
+            immersionbar              : "3.2.2",
+
+            // Utils
+            gson                      : "2.10",
+            utilcodex                 : "1.31.1",
+
+            /// Layer
+            layerVersion              : "1.0.7",
+
+            //屏幕适配 自带混淆
+            androidAutoSizeVersion    : "v1.2.1",
+
+            // 权限
+            XXPermissionsVersion      : "16.2",
+    ]
+
+    deps = [
+            // Kotlin
+            "kotlin-stdlib"           : "org.jetbrains.kotlin:kotlin-stdlib:${libs.kotlinStdlib}",
+            "core-ktx"                : "androidx.core:core-ktx:${libs.coreKtx}",
+
+            // AndroidX
+            "appcompat"               : "androidx.appcompat:appcompat:${libs.appcompat}",
+            "lifecycle-process"       : "androidx.lifecycle:lifecycle-process:${libs.lifecycle}",
+            "lifecycle-viewmodel-ktx" : "androidx.lifecycle:lifecycle-viewmodel-ktx:${libs.lifecycle}",
+            "lifecycle-runtime-ktx"   : "androidx.lifecycle:lifecycle-runtime-ktx:${libs.lifecycle}",
+            "constraintlayout"        : "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}",
+            "recyclerview"            : "androidx.recyclerview:recyclerview:${libs.recyclerview}",
+            "swiperefreshlayout"      : "androidx.swiperefreshlayout:swiperefreshlayout:${libs.swiperefreshlayout}",
+            "material"                : "com.google.android.material:material:${libs.material}",
+
+            // Coroutines
+            "coroutines-core"         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.coroutines}",
+            "coroutines-android"      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libs.coroutines}",
+
+            // Network
+            "retrofit"                : "com.squareup.retrofit2:retrofit:${libs.retrofit}",
+            "retrofit-gson"           : "com.squareup.retrofit2:converter-gson:${libs.retrofit}",
+            "okhttp-bom"              : "com.squareup.okhttp3:okhttp-bom:${libs.okhttp}",
+            "okhttp"                  : "com.squareup.okhttp3:okhttp",
+            "okhttp-logging"          : "com.squareup.okhttp3:logging-interceptor",
+            "kotlinx-serialization"   : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libs.kotlinxSerialization}",
+
+            // Storage
+            "mmkv"                    : "com.tencent:mmkv-static:${libs.mmkv}",
+            "mmkv-ktx"                : "com.github.DylanCaiCoding:MMKV-KTX:${libs.mmkvKtx}",
+
+            // Image
+            "glide"                   : "com.github.bumptech.glide:glide:${libs.glide}",
+            "glide-compiler"          : "com.github.bumptech.glide:compiler:${libs.glide}",
+
+            // UI
+            "viewbinding-ktx"         : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:${libs.viewbinding}",
+            "viewbinding-base"        : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:${libs.viewbinding}",
+            "loading-state-view"      : "com.github.DylanCaiCoding.LoadingStateView:loadingstateview-ktx:${libs.loadingStateView}",
+            "immersionbar"            : "com.geyifeng.immersionbar:immersionbar:${libs.immersionbar}",
+            "immersionbar-ktx"        : "com.geyifeng.immersionbar:immersionbar-ktx:${libs.immersionbar}",
+
+            // Utils
+            "gson"                    : "com.google.code.gson:gson:${libs.gson}",
+            "utilcodex"               : "com.blankj:utilcodex:${libs.utilcodex}",
+
+            /// Layer
+            "layer"                   : "com.github.goweii:Layer:${libs.layerVersion}",
+
+            /// 屏幕适配
+            "autosize"                : "com.github.JessYanCoding:AndroidAutoSize:${libs.androidAutoSizeVersion}",
+
+            // 权限请求框架：https://github.com/getActivity/XXPermissions
+            "XXPermissions"           : "com.github.getActivity:XXPermissions:${libs.XXPermissionsVersion}",
+
+    ]
+}

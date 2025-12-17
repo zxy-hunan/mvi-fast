@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.mvi.ui'
+    compileSdk rootProject.ext.versions.compileSdk
+    buildToolsVersion rootProject.ext.versions.buildTools
+
+    defaultConfig {
+        minSdk rootProject.ext.versions.minSdk
+        targetSdk rootProject.ext.versions.targetSdk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.versions.javaVersion
+        targetCompatibility rootProject.ext.versions.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.versions.jvmTarget
+    }
+
+    viewBinding.enabled = true
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+dependencies {
+    // ===== 核心库 =====
+    api project(':mvi-core')
+
+    // ===== UI 框架 =====
+
+    // 图片加载
+    api rootProject.ext.deps["glide"]
+    kapt rootProject.ext.deps["glide-compiler"]
+
+    // ViewBinding 扩展
+    api rootProject.ext.deps["viewbinding-ktx"]
+    api rootProject.ext.deps["viewbinding-base"]
+
+    // 缺省页/骨架屏
+    api rootProject.ext.deps["loading-state-view"]
+
+    // 沉浸式状态栏
+    api rootProject.ext.deps["immersionbar"]
+    api rootProject.ext.deps["immersionbar-ktx"]
+
+    // 对话框
+    api rootProject.ext.deps["layer"]
+
+    // 屏幕适配
+    api rootProject.ext.deps["autosize"]
+
+    // Material Design
+    api rootProject.ext.deps["material"]
+
+    // RecyclerView
+    api rootProject.ext.deps["recyclerview"]
+
+    // SwipeRefreshLayout
+    api rootProject.ext.deps["swiperefreshlayout"]
+
+    // ConstraintLayout
+    api rootProject.ext.deps["constraintlayout"]
+}

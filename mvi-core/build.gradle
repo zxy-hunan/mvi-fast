@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'kotlinx-serialization'
+}
+
+android {
+    namespace 'com.mvi.core'
+    compileSdk rootProject.ext.versions.compileSdk
+    buildToolsVersion rootProject.ext.versions.buildTools
+
+    defaultConfig {
+        minSdk rootProject.ext.versions.minSdk
+        targetSdk rootProject.ext.versions.targetSdk
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.versions.javaVersion
+        targetCompatibility rootProject.ext.versions.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = rootProject.ext.versions.jvmTarget
+    }
+
+    viewBinding.enabled = true
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+dependencies {
+    // Kotlin
+    api rootProject.ext.deps["kotlin-stdlib"]
+    api rootProject.ext.deps["core-ktx"]
+
+    // AndroidX
+    api rootProject.ext.deps["appcompat"]
+    api rootProject.ext.deps["lifecycle-process"]
+    api rootProject.ext.deps["lifecycle-viewmodel-ktx"]
+    api rootProject.ext.deps["lifecycle-runtime-ktx"]
+    api rootProject.ext.deps["constraintlayout"]
+    api rootProject.ext.deps["recyclerview"]
+    api rootProject.ext.deps["material"]
+
+    // Coroutines
+    api rootProject.ext.deps["coroutines-core"]
+    api rootProject.ext.deps["coroutines-android"]
+
+    // Network
+    api rootProject.ext.deps["retrofit"]
+    api rootProject.ext.deps["retrofit-gson"]
+    api platform(rootProject.ext.deps["okhttp-bom"])
+    api rootProject.ext.deps["okhttp"]
+    api rootProject.ext.deps["okhttp-logging"]
+    api rootProject.ext.deps["kotlinx-serialization"]
+
+    // Storage
+    api rootProject.ext.deps["mmkv"]
+    api rootProject.ext.deps["mmkv-ktx"]
+
+    // Utils
+    api rootProject.ext.deps["gson"]
+    api rootProject.ext.deps["utilcodex"]
+
+    // 基础 UI (MviDialog 和 SkeletonManager 依赖)
+    api rootProject.ext.deps["layer"]
+
+    // 权限请求框架：https://github.com/getActivity/XXPermissions
+    api(rootProject.ext.deps["XXPermissions"]) {
+        exclude group: 'com.android.support'
+    }
+
+}
