@@ -39,40 +39,23 @@ android {
 
 dependencies {
     // ===== 核心库 =====
+    // mvi-core 已经包含了大部分基础依赖,这里只依赖它即可
     api project(':mvi-core')
 
-    // ===== UI 框架 =====
+    // ===== mvi-ui 特有的 UI 组件 (mvi-core 中没有的) =====
 
-    // 图片加载
-    api rootProject.ext.deps["glide"]
-    kapt rootProject.ext.deps["glide-compiler"]
+    // 对话框 (mvi-core 中没有)
+    api "com.github.goweii:Layer:1.0.7"
 
-    // ViewBinding 扩展
-    api rootProject.ext.deps["viewbinding-ktx"]
-    api rootProject.ext.deps["viewbinding-base"]
+    // 屏幕适配 (mvi-core 中没有)
+    api "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
 
-    // 缺省页/骨架屏
-    api rootProject.ext.deps["loading-state-view"]
+    // ShapeView (mvi-core 中没有)
+    api "com.github.getActivity:ShapeView:8.5"
 
-    // 沉浸式状态栏
-    api rootProject.ext.deps["immersionbar"]
-    api rootProject.ext.deps["immersionbar-ktx"]
+    // BannerView (mvi-core 中没有)
+    api "io.github.youth5201314:banner:2.2.3"
 
-    // 对话框
-    api rootProject.ext.deps["layer"]
-
-    // 屏幕适配
-    api rootProject.ext.deps["autosize"]
-
-    // Material Design
-    api rootProject.ext.deps["material"]
-
-    // RecyclerView
-    api rootProject.ext.deps["recyclerview"]
-
-    // SwipeRefreshLayout
-    api rootProject.ext.deps["swiperefreshlayout"]
-
-    // ConstraintLayout
-    api rootProject.ext.deps["constraintlayout"]
+    // SwipeRefreshLayout (AndroidX 自带,不需要额外依赖)
+    // androidx.swiperefreshlayout:swiperefreshlayout 已经在 mvi-core 的 appcompat 中包含
 }

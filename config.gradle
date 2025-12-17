@@ -53,6 +53,10 @@ ext {
 
             // 权限
             XXPermissionsVersion      : "16.2",
+
+            shapeViewVersion          : "8.5",
+
+            bannerVersion             : "2.2.3",
     ]
 
     deps = [
@@ -109,6 +113,10 @@ ext {
 
             // 权限请求框架：https://github.com/getActivity/XXPermissions
             "XXPermissions"           : "com.github.getActivity:XXPermissions:${libs.XXPermissionsVersion}",
+
+            "ShapeView"               : "com.github.getActivity:ShapeView:${libs["shapeViewVersion"]}",
+
+            "BannerView"              : "io.github.youth5201314:banner:${libs["bannerVersion"]}",
 
     ]
 }

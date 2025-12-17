@@ -50,6 +50,7 @@ dependencies {
     api rootProject.ext.deps["lifecycle-runtime-ktx"]
     api rootProject.ext.deps["constraintlayout"]
     api rootProject.ext.deps["recyclerview"]
+    api rootProject.ext.deps["swiperefreshlayout"]
     api rootProject.ext.deps["material"]
 
     // Coroutines
@@ -71,6 +72,10 @@ dependencies {
     // Utils
     api rootProject.ext.deps["gson"]
     api rootProject.ext.deps["utilcodex"]
+
+    // ViewBinding扩展
+    api rootProject.ext.deps["viewbinding-ktx"]
+    api rootProject.ext.deps["viewbinding-base"]
 
     // 基础 UI (MviDialog 和 SkeletonManager 依赖)
     api rootProject.ext.deps["layer"]

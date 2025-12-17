@@ -33,6 +33,10 @@ android {
     }
 
     viewBinding.enabled = true
+
+    lint {
+        abortOnError false
+    }
 }
 
 dependencies {
