@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 修复 CoordinatorLayout 的 statusBarBackground 问题 -->
+    <!-- 将原始颜色值改为引用 -->
+    <color name="mvi_status_bar_background">#000000</color>
+
+    <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
+        <item name="statusBarBackground">@color/mvi_status_bar_background</item>
+    </style>
+</resources>
