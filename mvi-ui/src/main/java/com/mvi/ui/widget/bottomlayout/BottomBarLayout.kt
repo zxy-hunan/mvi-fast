@@ -1,375 +1,335 @@
-package com.mvi.ui.widget.bottomlayout;
+package com.mvi.ui.widget.bottomlayout
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
-
-import com.mvi.ui.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context
+import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
+import android.text.TextUtils
+import android.util.AttributeSet
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.mvi.ui.R
 
 /**
  * @author ChayChan
  * @description: 底部页签根节点
  * @date 2017/6/23  11:02
  */
-public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChangeListener {
+class BottomBarLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr), ViewPager.OnPageChangeListener {
 
-    private boolean titleTextBold = false;//文字加粗
-    private int titleTextSize = 12;//文字大小 默认为12sp
-    private int titleNormalColor;    //描述文本的默认显示颜色
-    private int titleSelectedColor;  //述文本的默认选中显示颜色
-    private int marginTop = 0;//文字和图标的距离,默认0dp
-    private int iconWidth;//图标的宽度
-    private int iconHeight;//图标的高度
-    private int itemPadding;//BottomBarItem的padding
-    private int unreadTextSize = 10; //未读数默认字体大小10sp
-    private int unreadNumThreshold = 99;//未读数阈值
-    private int unreadTextColor;//未读数字体颜色
-    private Drawable unreadTextBg;//未读数字体背景
-    private int msgTextSize = 6; //消息默认字体大小6sp
-    private int msgTextColor;//消息文字颜色
-    private Drawable msgTextBg;//消息文字背景
-    private Drawable notifyPointBg;//小红点背景
+    private var titleTextBold = false
+    private var titleTextSize = 12
+    private var titleNormalColor = 0
+    private var titleSelectedColor = 0
+    private var marginTop = 0
+    private var iconWidth = 0
+    private var iconHeight = 0
+    private var itemPadding = 0
+    private var unreadTextSize = 10
+    private var unreadNumThreshold = 99
+    private var unreadTextColor = 0
+    private var unreadTextBg: Drawable? = null
+    private var msgTextSize = 6
+    private var msgTextColor = 0
+    private var msgTextBg: Drawable? = null
+    private var notifyPointBg: Drawable? = null
 
-    private Drawable barBackground;
-    private int barHeight = 45;// bar的高度
+    private var barBackground: Drawable? = null
+    private var barHeight = 45
 
-    private Drawable floatIcon; //凸起图标
-    private boolean floatEnable; //是否中间图标凸起
-    private int floatMarginBottom = 0;//凸起按钮底部间距
-    private int floatIconWidth; //凸起图标的宽度
-    private int floatIconHeight; //凸起图标的高度
+    private var floatIcon: Drawable? = null
+    private var floatEnable = false
+    private var floatMarginBottom = 0
+    private var floatIconWidth = 0
+    private var floatIconHeight = 0
 
-    private ViewPager mViewPager;
-    private List<BottomBarItem> mItemViews = new ArrayList<>();
-    private int mCurrentItem;//当前条目的索引
-    private boolean mSmoothScroll;
+    private var mViewPager: ViewPager? = null
+    private val mItemViews = ArrayList<BottomBarItem>()
+    private var mCurrentItem = 0
+    private var mSmoothScroll = false
 
-    //相同tab点击是否回调
-    private boolean mSameTabClickCallBack;
+    private var mSameTabClickCallBack = false
 
-    private ViewPager2 mViewPager2;
+    private var mViewPager2: ViewPager2? = null
 
-    private LinearLayout mLlTab;
+    private val mLlTab: LinearLayout
 
-    public BottomBarLayout(Context context) {
-        this(context, null);
-    }
-
-    public BottomBarLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public BottomBarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.BottomBarLayout);
-        initAttrs(ta, context);
-        mLlTab = new LinearLayout(context);
-        mLlTab.setOrientation(LinearLayout.HORIZONTAL);
-        if (barBackground != null){
-            mLlTab.setBackground(barBackground);
-        }else{
-            mLlTab.setBackgroundColor(UIUtils.getColor(context, R.color.tab_gb));
+    init {
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.BottomBarLayout)
+        initAttrs(ta, context)
+        mLlTab = LinearLayout(context).apply {
+            orientation = LinearLayout.HORIZONTAL
+            background = barBackground ?: UIUtils.getDrawable(context, R.color.tab_gb)
         }
-        addView(mLlTab);
-        ta.recycle();
+        addView(mLlTab)
+        ta.recycle()
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.i("bottomBarLayout", "width: " + getMeasuredWidth() + " height: " + barHeight);
-        LayoutParams params = new LayoutParams(getMeasuredWidth(), barHeight);
-        params.gravity = Gravity.BOTTOM;
-        mLlTab.setLayoutParams(params);
-    }
-
-    private void initAttrs(TypedArray ta, Context context) {
-        mSmoothScroll = ta.getBoolean(R.styleable.BottomBarLayout_smoothScroll, mSmoothScroll);
-        mSameTabClickCallBack = ta.getBoolean(R.styleable.BottomBarLayout_sameTabClickCallBack, mSameTabClickCallBack);
-        barBackground = ta.getDrawable(R.styleable.BottomBarLayout_barBackground);
-        barHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_barHeight, UIUtils.dip2Px(context, barHeight));
-        floatEnable = ta.getBoolean(R.styleable.BottomBarLayout_floatEnable, floatEnable);
-        floatIcon = ta.getDrawable(R.styleable.BottomBarLayout_floatIcon);
-        floatMarginBottom = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatMarginBottom, UIUtils.dip2Px(context, floatMarginBottom));
-        floatIconWidth = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatIconWidth, UIUtils.dip2Px(context, floatIconWidth));
-        floatIconHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatIconHeight, UIUtils.dip2Px(context, floatIconHeight));
-
-
-        titleTextBold = ta.getBoolean(R.styleable.BottomBarLayout_itemTextBold, titleTextBold);
-        titleTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemTextSize, UIUtils.sp2px(context, titleTextSize));
-
-        titleNormalColor = ta.getColor(R.styleable.BottomBarLayout_textColorNormal, UIUtils.getColor(context, R.color.bbl_999999));
-        titleSelectedColor = ta.getColor(R.styleable.BottomBarLayout_textColorSelected, UIUtils.getColor(context, R.color.bbl_ff0000));
-
-        marginTop = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemMarginTop, UIUtils.dip2Px(context, marginTop));
-
-        iconWidth = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_iconWidth, 0);
-        iconHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_iconHeight, 0);
-        itemPadding = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemPadding, 0);
-
-        unreadTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_unreadTextSize, UIUtils.sp2px(context, unreadTextSize));
-        unreadTextColor = ta.getColor(R.styleable.BottomBarLayout_unreadTextColor, UIUtils.getColor(context, R.color.white));
-        unreadTextBg = ta.getDrawable(R.styleable.BottomBarLayout_unreadTextBg);
-
-        msgTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_msgTextSize, UIUtils.sp2px(context, msgTextSize));
-        msgTextColor = ta.getColor(R.styleable.BottomBarLayout_msgTextColor, UIUtils.getColor(context, R.color.white));
-        msgTextBg = ta.getDrawable(R.styleable.BottomBarLayout_msgTextBg);
-
-        notifyPointBg = ta.getDrawable(R.styleable.BottomBarLayout_notifyPointBg);
-
-        unreadNumThreshold = ta.getInteger(R.styleable.BottomBarLayout_unreadThreshold, unreadNumThreshold);
-    }
-
-    public void setViewPager(ViewPager viewPager) {
-        this.mViewPager = viewPager;
-
-        if (mViewPager != null) {
-            mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                }
-                @Override
-                public void onPageSelected(int position) {
-                    handlePageSelected(position);
-                }
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                }
-            });
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        Log.i("bottomBarLayout", "width: $measuredWidth height: $barHeight")
+        val params = LayoutParams(measuredWidth, barHeight).apply {
+            gravity = Gravity.BOTTOM
         }
+        mLlTab.layoutParams = params
     }
 
-    public void setViewPager2(ViewPager2 viewPager2) {
-        this.mViewPager2 = viewPager2;
+    private fun initAttrs(ta: TypedArray, context: Context) {
+        mSmoothScroll = ta.getBoolean(R.styleable.BottomBarLayout_smoothScroll, mSmoothScroll)
+        mSameTabClickCallBack = ta.getBoolean(R.styleable.BottomBarLayout_sameTabClickCallBack, mSameTabClickCallBack)
+        barBackground = ta.getDrawable(R.styleable.BottomBarLayout_barBackground)
+        barHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_barHeight, UIUtils.dip2Px(context, barHeight))
+        floatEnable = ta.getBoolean(R.styleable.BottomBarLayout_floatEnable, floatEnable)
+        floatIcon = ta.getDrawable(R.styleable.BottomBarLayout_floatIcon)
+        floatMarginBottom = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatMarginBottom, UIUtils.dip2Px(context, floatMarginBottom))
+        floatIconWidth = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatIconWidth, UIUtils.dip2Px(context, floatIconWidth))
+        floatIconHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_floatIconHeight, UIUtils.dip2Px(context, floatIconHeight))
 
-        if (mViewPager2 != null) {
-            mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                }
-                @Override
-                public void onPageSelected(int position) {
-                    handlePageSelected(position);
-                }
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                }
-            });
-        }
+        titleTextBold = ta.getBoolean(R.styleable.BottomBarLayout_itemTextBold, titleTextBold)
+        titleTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemTextSize, UIUtils.sp2px(context, titleTextSize.toFloat()))
+
+        titleNormalColor = ta.getColor(R.styleable.BottomBarLayout_textColorNormal, UIUtils.getColor(context, R.color.bbl_999999))
+        titleSelectedColor = ta.getColor(R.styleable.BottomBarLayout_textColorSelected, UIUtils.getColor(context, R.color.bbl_ff0000))
+
+        marginTop = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemMarginTop, UIUtils.dip2Px(context, marginTop))
+
+        iconWidth = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_iconWidth, 0)
+        iconHeight = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_iconHeight, 0)
+        itemPadding = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_itemPadding, 0)
+
+        unreadTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_unreadTextSize, UIUtils.sp2px(context, unreadTextSize.toFloat()))
+        unreadTextColor = ta.getColor(R.styleable.BottomBarLayout_unreadTextColor, UIUtils.getColor(context, R.color.white))
+        unreadTextBg = ta.getDrawable(R.styleable.BottomBarLayout_unreadTextBg)
+
+        msgTextSize = ta.getDimensionPixelSize(R.styleable.BottomBarLayout_msgTextSize, UIUtils.sp2px(context, msgTextSize.toFloat()))
+        msgTextColor = ta.getColor(R.styleable.BottomBarLayout_msgTextColor, UIUtils.getColor(context, R.color.white))
+        msgTextBg = ta.getDrawable(R.styleable.BottomBarLayout_msgTextBg)
+
+        notifyPointBg = ta.getDrawable(R.styleable.BottomBarLayout_notifyPointBg)
+
+        unreadNumThreshold = ta.getInteger(R.styleable.BottomBarLayout_unreadThreshold, unreadNumThreshold)
     }
 
-    private BottomBarItem createBottomBarItem(Drawable normalIcon, Drawable selectedIcon, String title, int iconWidth, int iconHeight, String lottieJson){
-        return new BottomBarItem.Builder(getContext())
-                .titleTextBold(titleTextBold)
-                .titleTextSize(titleTextSize)
-                .titleNormalColor(titleNormalColor)
-                .iconHeight(iconHeight)
-                .iconWidth(iconWidth)
-                .marginTop(marginTop)
-                .itemPadding(itemPadding)
-                .titleSelectedColor(titleSelectedColor)
-                .lottieJson(lottieJson)
-                .unreadNumThreshold(unreadNumThreshold)
-                .unreadTextBg(unreadTextBg)
-                .unreadTextSize(unreadTextSize)
-                .unreadTextColor(unreadTextColor)
-                .msgTextBg(msgTextBg)
-                .msgTextColor(msgTextColor)
-                .msgTextSize(msgTextSize)
-                .notifyPointBg(notifyPointBg)
-                .create(normalIcon, selectedIcon, title);
+    fun setViewPager(viewPager: ViewPager?) {
+        mViewPager = viewPager
+        mViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                handlePageSelected(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
     }
 
-    public void setData(List<TabData> tabData){
-        if (tabData == null || tabData.size() == 0){
-            throw new IllegalArgumentException("tabData is null");
-        }
-        mItemViews.clear();
-        mLlTab.removeAllViews();
+    fun setViewPager2(viewPager2: ViewPager2?) {
+        mViewPager2 = viewPager2
+        mViewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-        //添加tab
-        for (int i = 0; i < tabData.size(); i++) {
-            TabData itemData = tabData.get(i);
-            Drawable normalIcon = !TextUtils.isEmpty(itemData.getLottieJson()) ? null : itemData.getNormalIcon() != null ? itemData.getNormalIcon() : getContext().getResources().getDrawable(itemData.getNormalIconResId());
-            Drawable selectedIcon = !TextUtils.isEmpty(itemData.getLottieJson()) ? null : itemData.getSelectedIcon() != null ? itemData.getSelectedIcon() : getContext().getResources().getDrawable(itemData.getSelectedIconResId());
-            int iconWidth = itemData.getIconWidth() == 0 ? this.iconWidth : itemData.getIconWidth();
-            int iconHeight = itemData.getIconHeight() == 0 ? this.iconHeight : itemData.getIconHeight();
-            BottomBarItem item = createBottomBarItem(normalIcon, selectedIcon, itemData.getTitle(), iconWidth, iconHeight, itemData.getLottieJson());
-            addItem(item);
+            override fun onPageSelected(position: Int) {
+                handlePageSelected(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+    }
+
+    private fun createBottomBarItem(
+        normalIcon: Drawable?,
+        selectedIcon: Drawable?,
+        title: String,
+        iconWidth: Int,
+        iconHeight: Int,
+        lottieJson: String?
+    ): BottomBarItem {
+        return BottomBarItem.Builder(context)
+            .titleTextBold(titleTextBold)
+            .titleTextSize(titleTextSize)
+            .titleNormalColor(titleNormalColor)
+            .iconHeight(iconHeight)
+            .iconWidth(iconWidth)
+            .marginTop(marginTop)
+            .itemPadding(itemPadding)
+            .titleSelectedColor(titleSelectedColor)
+            .lottieJson(lottieJson)
+            .unreadNumThreshold(unreadNumThreshold)
+            .unreadTextBg(unreadTextBg)
+            .unreadTextSize(unreadTextSize)
+            .unreadTextColor(unreadTextColor)
+            .msgTextBg(msgTextBg)
+            .msgTextColor(msgTextColor)
+            .msgTextSize(msgTextSize)
+            .notifyPointBg(notifyPointBg)
+            .create(normalIcon, selectedIcon, title)
+    }
+
+    fun setData(tabData: List<TabData>?) {
+        require(!tabData.isNullOrEmpty()) { "tabData is null" }
+
+        mItemViews.clear()
+        mLlTab.removeAllViews()
+
+        // 添加tab
+        for (i in tabData.indices) {
+            val itemData = tabData[i]
+            val normalIcon = if (!TextUtils.isEmpty(itemData.lottieJson)) {
+                null
+            } else {
+                itemData.normalIcon ?: UIUtils.getDrawable(context, itemData.normalIconResId)
+            }
+            val selectedIcon = if (!TextUtils.isEmpty(itemData.lottieJson)) {
+                null
+            } else {
+                itemData.selectedIcon ?: UIUtils.getDrawable(context, itemData.selectedIconResId)
+            }
+            val iconWidth = if (itemData.iconWidth == 0) this.iconWidth else itemData.iconWidth
+            val iconHeight = if (itemData.iconHeight == 0) this.iconHeight else itemData.iconHeight
+            val item = createBottomBarItem(normalIcon, selectedIcon, itemData.title, iconWidth, iconHeight, itemData.lottieJson)
+            addItem(item)
         }
 
-        //如果开启凸起 且是 其他tab总数是偶数
-        if (floatEnable && tabData.size() % 2 == 0){
-            BottomBarItem item = createBottomBarItem(floatIcon, floatIcon, "", floatIconWidth, floatIconHeight, "");
-            addItem(item, (tabData.size() + 1) / 2, true);
+        // 如果开启凸起 且是 其他tab总数是偶数
+        if (floatEnable && tabData.size % 2 == 0) {
+            val item = createBottomBarItem(floatIcon, floatIcon, "", floatIconWidth, floatIconHeight, "")
+            addItem(item, (tabData.size + 1) / 2, true)
         }
 
-        mItemViews.get(0).refreshTab(true);
+        mItemViews[0].refreshTab(true)
     }
 
-    public void addItem(BottomBarItem item){
-        addItem(item, -1, false);
+    fun addItem(item: BottomBarItem) {
+        addItem(item, -1, false)
     }
 
-    public void addItem(BottomBarItem item, int index, boolean isFloatItem) {
-        if (index == -1){
-            mItemViews.add(item);
-        }else{
-            mItemViews.add(index, item);
+    fun addItem(item: BottomBarItem, index: Int, isFloatItem: Boolean) {
+        if (index == -1) {
+            mItemViews.add(item)
+        } else {
+            mItemViews.add(index, item)
         }
 
-        int position = index != -1 ? index : mItemViews.size() - 1;
-        Log.e("bottomBarLayout", "position: " + position);
+        val position = if (index != -1) index else mItemViews.size - 1
+        Log.e("bottomBarLayout", "position: $position")
 
-        View view = item;
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT);
-        layoutParams.weight = 1;
-        layoutParams.gravity = Gravity.CENTER;
-        view.setLayoutParams(layoutParams);
+        var view: View = item
+        val layoutParams = LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT).apply {
+            weight = 1f
+            gravity = Gravity.CENTER
+        }
+        view.layoutParams = layoutParams
 
-        if (isFloatItem){
-            LayoutParams params = new LayoutParams(floatIconWidth, floatIconHeight);
-            params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-            params.bottomMargin = floatMarginBottom;
-            addView(item, params);
-            view = new View(getContext());
+        if (isFloatItem) {
+            val params = LayoutParams(floatIconWidth, floatIconHeight).apply {
+                gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+                bottomMargin = floatMarginBottom
+            }
+            addView(item, params)
+            view = View(context)
         }
 
-        mLlTab.addView(view, position, layoutParams);
+        mLlTab.addView(view, position, layoutParams)
 
-        //tab添加点击事件
-        for (int i = 0; i < mItemViews.size(); i++) {
-            mItemViews.get(i).setOnClickListener(new MyOnClickListener(i));
+        // tab添加点击事件
+        for (i in mItemViews.indices) {
+            mItemViews[i].setOnClickListener(MyOnClickListener(i))
         }
     }
 
-    public void removeItem(int position) {
-        if (position >= 0 && position < mItemViews.size()) {
-            BottomBarItem item = mItemViews.get(position);
+    fun removeItem(position: Int) {
+        if (position in mItemViews.indices) {
+            val item = mItemViews[position]
             if (mItemViews.contains(item)) {
-                resetState();
-                mLlTab.removeViewAt(position);
+                resetState()
+                mLlTab.removeViewAt(position)
             }
-            mItemViews.remove(item);
+            mItemViews.remove(item)
 
-            //tab添加点击事件
-            for (int i = 0; i < mItemViews.size(); i++) {
-                mItemViews.get(i).setOnClickListener(new MyOnClickListener(i));
+            // tab添加点击事件
+            for (i in mItemViews.indices) {
+                mItemViews[i].setOnClickListener(MyOnClickListener(i))
             }
         }
     }
 
-    private void handlePageSelected(int position){
-        //滑动时判断是否需要拦截跳转
-        if (mOnPageChangeInterceptor != null
-                && mOnPageChangeInterceptor.onIntercepted(position)){
-            setCurrentItem(mCurrentItem);
-            return;
+    private fun handlePageSelected(position: Int) {
+        // 滑动时判断是否需要拦截跳转
+        if (mOnPageChangeInterceptor?.onIntercepted(position) == true) {
+            setCurrentItem(mCurrentItem)
+            return
         }
-        resetState();
-        mItemViews.get(position).refreshTab(true);
-        int prePos = mCurrentItem;
-        mCurrentItem = position;//记录当前位置
-        if (onItemSelectedListener != null) {
-            onItemSelectedListener.onItemSelected(getBottomItem(mCurrentItem), prePos, mCurrentItem);
-        }
+        resetState()
+        mItemViews[position].refreshTab(true)
+        val prePos = mCurrentItem
+        mCurrentItem = position
+        onItemSelectedListener?.onItemSelected(getBottomItem(mCurrentItem), prePos, mCurrentItem)
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
+    override fun onPageSelected(position: Int) {
+        handlePageSelected(position)
     }
 
-    @Override
-    public void onPageSelected(int position) {
-        handlePageSelected(position);
-    }
+    override fun onPageScrollStateChanged(state: Int) {}
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    private class MyOnClickListener implements OnClickListener {
-
-        private int currentIndex;
-
-        public MyOnClickListener(int i) {
-            this.currentIndex = i;
-        }
-
-        @Override
-        public void onClick(View v) {
-            //点击时判断是否需要拦截跳转
-            if (mOnPageChangeInterceptor != null
-                    && mOnPageChangeInterceptor.onIntercepted(currentIndex)){
-                return;
+    private inner class MyOnClickListener(private val currentIndex: Int) : OnClickListener {
+        override fun onClick(v: View) {
+            // 点击时判断是否需要拦截跳转
+            if (mOnPageChangeInterceptor?.onIntercepted(currentIndex) == true) {
+                return
             }
+
             if (currentIndex == mCurrentItem) {
-                //如果还是同个页签，判断是否要回调
-                if (onItemSelectedListener != null && mSameTabClickCallBack){
-                    onItemSelectedListener.onItemSelected(getBottomItem(currentIndex), mCurrentItem, currentIndex);
+                // 如果还是同个页签，判断是否要回调
+                if (onItemSelectedListener != null && mSameTabClickCallBack) {
+                    onItemSelectedListener?.onItemSelected(getBottomItem(currentIndex), mCurrentItem, currentIndex)
                 }
-            }else{
+            } else {
                 if (mViewPager != null || mViewPager2 != null) {
-                    if (mViewPager != null){
-                        mViewPager.setCurrentItem(currentIndex, mSmoothScroll);
-                    }else {
-                        mViewPager2.setCurrentItem(currentIndex, mSmoothScroll);
-                    }
-                    return;
+                    mViewPager?.setCurrentItem(currentIndex, mSmoothScroll)
+                        ?: mViewPager2?.setCurrentItem(currentIndex, mSmoothScroll)
+                    return
                 }
-                if (onItemSelectedListener != null){
-                    onItemSelectedListener.onItemSelected(getBottomItem(currentIndex), mCurrentItem, currentIndex);
-                }
-                updateTabState(currentIndex);
+                onItemSelectedListener?.onItemSelected(getBottomItem(currentIndex), mCurrentItem, currentIndex)
+                updateTabState(currentIndex)
             }
         }
     }
 
-    private void updateTabState(int position) {
-        resetState();
-        mCurrentItem = position;
-        mItemViews.get(mCurrentItem).refreshTab(true);
+    private fun updateTabState(position: Int) {
+        resetState()
+        mCurrentItem = position
+        mItemViews[mCurrentItem].refreshTab(true)
     }
 
     /**
      * 重置当前按钮的状态
      */
-    private void resetState() {
-        if (mCurrentItem < mItemViews.size()) {
-            if (mItemViews.get(mCurrentItem).isSelected()){
-                mItemViews.get(mCurrentItem).refreshTab(false);
+    private fun resetState() {
+        if (mCurrentItem < mItemViews.size) {
+            if (mItemViews[mCurrentItem].isSelected) {
+                mItemViews[mCurrentItem].refreshTab(false)
             }
         }
     }
 
-    public void setCurrentItem(int currentItem) {
+    fun setCurrentItem(currentItem: Int) {
         if (mViewPager != null || mViewPager2 != null) {
-            if (mViewPager != null){
-                mViewPager.setCurrentItem(currentItem, mSmoothScroll);
-            }else {
-                mViewPager2.setCurrentItem(currentItem, mSmoothScroll);
-            }
+            mViewPager?.setCurrentItem(currentItem, mSmoothScroll)
+                ?: mViewPager2?.setCurrentItem(currentItem, mSmoothScroll)
         } else {
-            if (onItemSelectedListener != null) {
-                onItemSelectedListener.onItemSelected(getBottomItem(currentItem), mCurrentItem, currentItem);
-            }
-            updateTabState(currentItem);
+            onItemSelectedListener?.onItemSelected(getBottomItem(currentItem), mCurrentItem, currentItem)
+            updateTabState(currentItem)
         }
     }
 
@@ -379,8 +339,8 @@ public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChan
      * @param position  底部标签的下标
      * @param unreadNum 未读数
      */
-    public void setUnread(int position, int unreadNum) {
-        mItemViews.get(position).setUnreadNum(unreadNum);
+    fun setUnread(position: Int, unreadNum: Int) {
+        mItemViews[position].setUnreadNum(unreadNum)
     }
 
     /**
@@ -389,8 +349,8 @@ public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChan
      * @param position 底部标签的下标
      * @param msg      未读数
      */
-    public void setMsg(int position, String msg) {
-        mItemViews.get(position).setMsg(msg);
+    fun setMsg(position: Int, msg: String) {
+        mItemViews[position].setMsg(msg)
     }
 
     /**
@@ -398,8 +358,8 @@ public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChan
      *
      * @param position 底部标签的下标
      */
-    public void hideMsg(int position) {
-        mItemViews.get(position).hideMsg();
+    fun hideMsg(position: Int) {
+        mItemViews[position].hideMsg()
     }
 
     /**
@@ -407,8 +367,8 @@ public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChan
      *
      * @param position 底部标签的下标
      */
-    public void showNotify(int position) {
-        mItemViews.get(position).showNotify();
+    fun showNotify(position: Int) {
+        mItemViews[position].showNotify()
     }
 
     /**
@@ -416,39 +376,60 @@ public class BottomBarLayout extends FrameLayout implements ViewPager.OnPageChan
      *
      * @param position 底部标签的下标
      */
-    public void hideNotify(int position) {
-        mItemViews.get(position).hideNotify();
+    fun hideNotify(position: Int) {
+        mItemViews[position].hideNotify()
     }
 
-    public int getCurrentItem() {
-        return mCurrentItem;
+    fun getCurrentItem(): Int = mCurrentItem
+
+    fun setSmoothScroll(smoothScroll: Boolean) {
+        mSmoothScroll = smoothScroll
     }
 
-    public void setSmoothScroll(boolean smoothScroll) {
-        this.mSmoothScroll = smoothScroll;
+    fun getBottomItem(position: Int): BottomBarItem = mItemViews[position]
+
+    private var onItemSelectedListener: OnItemSelectedListener? = null
+
+    interface OnItemSelectedListener {
+        fun onItemSelected(bottomBarItem: BottomBarItem, previousPosition: Int, currentPosition: Int)
     }
 
-    public BottomBarItem getBottomItem(int position) {
-        return mItemViews.get(position);
+    fun setOnItemSelectedListener(listener: OnItemSelectedListener?) {
+        onItemSelectedListener = listener
     }
 
-    private OnItemSelectedListener onItemSelectedListener;
+    private var mOnPageChangeInterceptor: OnPageChangeInterceptor? = null
 
-    public interface OnItemSelectedListener {
-        void onItemSelected(BottomBarItem bottomBarItem, int previousPosition, int currentPosition);
+    fun setOnPageChangeInterceptor(interceptor: OnPageChangeInterceptor?) {
+        mOnPageChangeInterceptor = interceptor
     }
 
-    public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
-        this.onItemSelectedListener = onItemSelectedListener;
+    interface OnPageChangeInterceptor {
+        fun onIntercepted(position: Int): Boolean
     }
-
-    private OnPageChangeInterceptor mOnPageChangeInterceptor;
-
-    public void setOnPageChangeInterceptor(OnPageChangeInterceptor onPageChangedInterceptor) {
-        mOnPageChangeInterceptor = onPageChangedInterceptor;
+    
+    /**
+     * 清理所有监听器 - 防止内存泄漏
+     * 在 Activity/Fragment onDestroy 时调用
+     */
+    fun clearListeners() {
+        // 清理页面变化监听器
+        mViewPager?.removeOnPageChangeListener(this)
+        mViewPager2?.unregisterOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {})
+        
+        // 清理 item 点击监听器
+        mItemViews.forEach { item ->
+            item.setOnClickListener(null)
+        }
+        
+        // 清理回调接口
+        onItemSelectedListener = null
+        mOnPageChangeInterceptor = null
     }
-
-    public interface OnPageChangeInterceptor {
-        boolean onIntercepted(int position);
+    
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        // View 从窗口分离时自动清理
+        clearListeners()
     }
 }

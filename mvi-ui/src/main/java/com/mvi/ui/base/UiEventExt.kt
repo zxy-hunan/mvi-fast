@@ -7,6 +7,24 @@ package com.mvi.ui.base
  * 注意: 由于 Kotlin 的 sealed class 跨模块限制,
  * 这些事件类不继承自 UiEvent,而是作为独立的事件类型
  * 在 ViewModel 中使用时,可以通过手动发送或使用辅助方法
+ *
+ * ⚠️ 内存泄漏警告:
+ * onRetry 回调函数会被保存在 Flow/Channel 中,请注意:
+ * 1. 避免在 lambda 中直接引用 Activity/Fragment
+ * 2. 推荐使用 ViewModel 的方法引用: `::retryLoad`
+ * 3. 或使用轻量级的 Intent 方式: `{ sendIntent(RetryIntent) }`
+ *
+ * 正确示例:
+ * ```kotlin
+ * // ✅ 推荐 - 使用方法引用
+ * showErrorState(onRetry = ::retryLoadData)
+ *
+ * // ✅ 推荐 - 使用 Intent
+ * showErrorState(onRetry = { sendIntent(LoadDataIntent) })
+ *
+ * // ❌ 错误 - 直接引用 Activity
+ * showErrorState(onRetry = { activity.recreate() })
+ * ```
  */
 sealed interface MviUiEvent {
     /**

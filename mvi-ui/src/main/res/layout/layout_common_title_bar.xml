@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/title_bar_root"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- 左侧按钮 -->
+    <ImageView
+        android:id="@+id/title_bar_left_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back_black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back"
+        tools:ignore="UseAppTint" />
+
+    <!-- 中间标题 -->
+    <TextView
+        android:id="@+id/title_bar_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="标题" />
+
+    <!-- 右侧文字按钮 -->
+    <TextView
+        android:id="@+id/title_bar_right_text_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        android:visibility="gone"
+        tools:text="完成"
+        tools:visibility="visible" />
+
+    <!-- 右侧图标按钮 -->
+    <ImageView
+        android:id="@+id/title_bar_right_icon_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="4dp"
+        android:padding="12dp"
+        android:scaleType="centerInside"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:visibility="gone"
+        android:contentDescription="@string/more"
+        tools:src="@drawable/ic_more"
+        tools:visibility="visible"
+        tools:ignore="UseAppTint" />
+
+</LinearLayout>

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import com.mvi.core.util.ActivityStackManager
 import kotlinx.coroutines.launch
 
 /**
@@ -29,6 +30,9 @@ abstract class MviActivity<VB : ViewBinding, VM : MviViewModel<I>, I : MviIntent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 添加到Activity栈管理
+        ActivityStackManager.addActivity(this)
 
         // 初始化ViewBinding
         binding = createBinding()
@@ -111,5 +115,11 @@ abstract class MviActivity<VB : ViewBinding, VM : MviViewModel<I>, I : MviIntent
      */
     protected fun sendIntent(intent: I) {
         viewModel.sendIntent(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 从Activity栈管理中移除
+        ActivityStackManager.removeActivity(this)
     }
 }

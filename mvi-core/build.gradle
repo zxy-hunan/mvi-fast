@@ -80,6 +80,8 @@ dependencies {
     // 基础 UI (MviDialog 和 SkeletonManager 依赖)
     api rootProject.ext.deps["layer"]
 
+    api rootProject.ext.deps["RxTool-RxKit"]
+
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     api(rootProject.ext.deps["XXPermissions"]) {
         exclude group: 'com.android.support'

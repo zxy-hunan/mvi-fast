@@ -45,7 +45,8 @@ dependencies {
     // ===== mvi-ui 特有的 UI 组件 (mvi-core 中没有的) =====
 
     // 对话框 (mvi-core 中没有)
-    api "com.github.goweii:Layer:1.0.7"
+//    api "com.github.goweii:Layer:1.0.7"
+//    api rootProject.ext.deps["layer"]
 
     // 屏幕适配 (mvi-core 中没有)
     api "com.github.JessYanCoding:AndroidAutoSize:v1.2.1"
@@ -55,6 +56,9 @@ dependencies {
 
     // BannerView (mvi-core 中没有)
     api "io.github.youth5201314:banner:2.2.3"
+
+
+
 
     // SwipeRefreshLayout (AndroidX 自带,不需要额外依赖)
     // androidx.swiperefreshlayout:swiperefreshlayout 已经在 mvi-core 的 appcompat 中包含

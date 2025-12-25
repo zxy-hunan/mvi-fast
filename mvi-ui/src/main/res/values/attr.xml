@@ -70,4 +70,25 @@
 
     </declare-styleable>
 
+    <declare-styleable name="CommonTitleBar">
+        <!--标题文字-->
+        <attr name="titleText" format="string" />
+        <!--标题文字颜色-->
+        <attr name="titleTextColor" format="color" />
+        <!--标题文字大小-->
+        <attr name="titleTextSize" format="dimension" />
+        <!--标题栏背景色-->
+        <attr name="titleBarBackground" format="color|reference" />
+        <!--是否显示左侧按钮-->
+        <attr name="showLeftButton" format="boolean" />
+        <!--左侧按钮图标-->
+        <attr name="leftIcon" format="reference" />
+        <!--右侧文字-->
+        <attr name="rightText" format="string" />
+        <!--右侧文字颜色-->
+        <attr name="rightTextColor" format="color" />
+        <!--右侧图标-->
+        <attr name="rightIcon" format="reference" />
+    </declare-styleable>
+
 </resources>

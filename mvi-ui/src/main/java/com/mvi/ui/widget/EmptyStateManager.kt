@@ -109,8 +109,25 @@ class EmptyStateManager(
      */
     fun hide() {
         currentStateView?.let {
+            // 清理点击监听器,防止内存泄漏
+            clearViewListeners(it)
             container.removeView(it)
             currentStateView = null
+        }
+    }
+
+    /**
+     * 清理 View 的监听器,防止内存泄漏
+     */
+    private fun clearViewListeners(view: View) {
+        // 清理按钮的点击监听器
+        view.findViewById<Button>(R.id.btnRetry)?.setOnClickListener(null)
+
+        // 如果是 ViewGroup,递归清理子 View
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                clearViewListeners(view.getChildAt(i))
+            }
         }
     }
 

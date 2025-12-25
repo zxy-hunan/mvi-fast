@@ -76,7 +76,7 @@ class SkeletonManager(
      * 隐藏骨架屏
      */
     fun hide() {
-        // 停止动画
+        // 停止动画 - 必须先停止动画,防止内存泄漏
         stopShimmerAnimation()
 
         // 恢复原始视图
@@ -94,6 +94,15 @@ class SkeletonManager(
      * 是否正在显示
      */
     fun isShowing(): Boolean = skeletonView != null
+
+    /**
+     * 释放资源 - 在 Activity/Fragment onDestroy 时调用
+     */
+    fun release() {
+        hide()
+        shimmerAnimator?.removeAllUpdateListeners()
+        shimmerAnimator = null
+    }
 
     /**
      * 创建骨架屏视图
@@ -133,7 +142,10 @@ class SkeletonManager(
      * 停止闪烁动画
      */
     private fun stopShimmerAnimation() {
-        shimmerAnimator?.cancel()
+        shimmerAnimator?.apply {
+            removeAllUpdateListeners()
+            cancel()
+        }
         shimmerAnimator = null
     }
 }
@@ -269,13 +281,22 @@ class RecyclerViewSkeletonManager(
     fun hide() {
         // 恢复原始适配器
         recyclerView.adapter = originalAdapter
+        // 清理骨架屏 Adapter，防止内存泄漏
         skeletonAdapter = null
+        originalAdapter = null
     }
 
     /**
      * 是否正在显示
      */
     fun isShowing(): Boolean = skeletonAdapter != null
+
+    /**
+     * 释放资源 - 防止内存泄漏
+     */
+    fun release() {
+        hide()
+    }
 
     /**
      * 骨架屏适配器

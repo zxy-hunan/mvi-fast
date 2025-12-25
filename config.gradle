@@ -39,7 +39,6 @@ ext {
             // UI
             viewbinding               : "2.1.0",
             loadingStateView          : "5.0.0",
-            immersionbar              : "3.2.2",
 
             // Utils
             gson                      : "2.10",
@@ -57,6 +56,9 @@ ext {
             shapeViewVersion          : "8.5",
 
             bannerVersion             : "2.2.3",
+
+            //工具类
+            RxToolRxKitVersion        : "2.6.2",
     ]
 
     deps = [
@@ -98,8 +100,6 @@ ext {
             "viewbinding-ktx"         : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:${libs.viewbinding}",
             "viewbinding-base"        : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:${libs.viewbinding}",
             "loading-state-view"      : "com.github.DylanCaiCoding.LoadingStateView:loadingstateview-ktx:${libs.loadingStateView}",
-            "immersionbar"            : "com.geyifeng.immersionbar:immersionbar:${libs.immersionbar}",
-            "immersionbar-ktx"        : "com.geyifeng.immersionbar:immersionbar-ktx:${libs.immersionbar}",
 
             // Utils
             "gson"                    : "com.google.code.gson:gson:${libs.gson}",
@@ -117,6 +117,9 @@ ext {
             "ShapeView"               : "com.github.getActivity:ShapeView:${libs["shapeViewVersion"]}",
 
             "BannerView"              : "io.github.youth5201314:banner:${libs["bannerVersion"]}",
+
+            "RxTool-RxKit"            : "com.github.tamsiree.RxTool:RxKit:${libs["RxToolRxKitVersion"]}",
+
 
     ]
 }

@@ -1,30 +1,31 @@
-package com.mvi.ui.widget.bottomlayout;
+package com.mvi.ui.widget.bottomlayout
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.content.Context
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 
 /**
  * @author chaychan
  * @date 2017/3/7  17:19
  */
-public class UIUtils {
+object UIUtils {
     /**
      * dip-->px
      */
-    public static int dip2Px(Context context,int dip) {
+    @JvmStatic
+    fun dip2Px(context: Context, dip: Int): Int {
         // px/dip = density;
         // density = dpi/160
         // 320*480 density = 1 1px = 1dp
         // 1280*720 density = 2 2px = 1dp
-
-        float density = context.getResources().getDisplayMetrics().density;
-        int px = (int) (dip * density + 0.5f);
-        return px;
+        val density = context.resources.displayMetrics.density
+        return (dip * density + 0.5f).toInt()
     }
 
-    public static int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+    @JvmStatic
+    fun dp2px(context: Context, dpValue: Float): Int {
+        val scale = context.resources.displayMetrics.density
+        return (dpValue * scale + 0.5f).toInt()
     }
 
     /**
@@ -33,24 +34,25 @@ public class UIUtils {
      * @param spValue
      * @return
      */
-    public static int sp2px(Context context,float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
+    @JvmStatic
+    fun sp2px(context: Context, spValue: Float): Int {
+        val fontScale = context.resources.displayMetrics.scaledDensity
+        return (spValue * fontScale + 0.5f).toInt()
     }
 
-
-    public static int px2dp(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
+    @JvmStatic
+    fun px2dp(context: Context, pxValue: Float): Int {
+        val scale = context.resources.displayMetrics.density
+        return (pxValue / scale + 0.5f).toInt()
     }
 
-
-
-    public static int getColor(Context context,int colorId){
-        return context.getResources().getColor(colorId);
+    @JvmStatic
+    fun getColor(context: Context, colorId: Int): Int {
+        return ContextCompat.getColor(context, colorId)
     }
 
-    public static Drawable getDrawable(Context context,int resId){
-        return  context.getResources().getDrawable(resId);
+    @JvmStatic
+    fun getDrawable(context: Context, resId: Int): Drawable? {
+        return ContextCompat.getDrawable(context, resId)
     }
 }

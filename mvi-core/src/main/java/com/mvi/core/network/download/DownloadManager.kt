@@ -34,6 +34,9 @@ import java.io.InputStream
  *         }
  *     }
  * }
+ * 
+ * // 在不使用时释放资源
+ * downloadManager.release()
  * ```
  */
 class DownloadManager(
@@ -132,6 +135,19 @@ class DownloadManager(
         val file = File(savePath)
         if (file.exists()) {
             file.delete()
+        }
+    }
+    
+    /**
+     * 释放资源 - 防止内存泄漏
+     * 在不再使用时调用，关闭 OkHttpClient 的连接池和线程池
+     */
+    fun release() {
+        try {
+            okHttpClient.dispatcher.executorService.shutdown()
+            okHttpClient.connectionPool.evictAll()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 

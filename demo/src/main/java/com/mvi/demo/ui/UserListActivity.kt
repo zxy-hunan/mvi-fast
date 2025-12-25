@@ -115,17 +115,21 @@ class UserListActivity : MviUiActivity<ActivityUserListBinding, UserListViewMode
 
 /**
  * 用户列表适配器
+ * 优化：使用 ListAdapter + DiffUtil 提升性能
  */
 class UserAdapter(
     private val onDeleteClick: (User) -> Unit
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+) : androidx.recyclerview.widget.ListAdapter<User, UserAdapter.UserViewHolder>(
+    object : androidx.recyclerview.widget.DiffUtil.ItemCallback<User>() {
+        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    private var users: List<User> = emptyList()
-
-    fun submitList(newUsers: List<User>) {
-        users = newUsers
-        notifyDataSetChanged()
+        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+            return oldItem == newItem
+        }
     }
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = ItemUserBinding.inflate(
@@ -137,10 +141,8 @@ class UserAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount() = users.size
 
     inner class UserViewHolder(
         private val binding: ItemUserBinding
@@ -154,5 +156,17 @@ class UserAdapter(
                 onDeleteClick(user)
             }
         }
+        
+        /**
+         * 清理监听器 - RecyclerView 回收时自动调用
+         */
+        fun unbind() {
+            binding.btnDelete.setOnClickListener(null)
+        }
+    }
+    
+    override fun onViewRecycled(holder: UserViewHolder) {
+        super.onViewRecycled(holder)
+        holder.unbind()
     }
 }

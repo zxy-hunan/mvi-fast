@@ -165,6 +165,18 @@ abstract class MviDialog<VB : ViewBinding>(
                 // 动画结束后
             }
         })
+        
+        // 添加关闭监听，确保资源清理
+        dialogLayer!!.addOnDismissListener(object : per.goweii.layer.core.Layer.OnDismissListener {
+            override fun onPreDismiss(layer: per.goweii.layer.core.Layer) {
+                // 开始关闭
+            }
+
+            override fun onPostDismiss(layer: per.goweii.layer.core.Layer) {
+                // 完全关闭后清理 DialogLayer 引用
+                dialogLayer = null
+            }
+        })
 
         // 显示
         dialogLayer!!.show()
@@ -503,6 +515,18 @@ abstract class MviViewModelDialog<VB : ViewBinding, VM : MviViewModel<I>, I : Mv
 
     override fun dismiss() {
         stopObserving()
+        // 清理 ViewModel 引用，防止内存泄漏
+        // 注意：不能清理 ViewModel 本身，它由 Activity 管理
         super.dismiss()
+    }
+    
+    /**
+     * 完全释放资源 - 防止内存泄漏
+     * 在不再使用 Dialog 时应该调用此方法
+     */
+    fun release() {
+        stopObserving()
+        dismiss()
+        dialogLayer = null
     }
 }
