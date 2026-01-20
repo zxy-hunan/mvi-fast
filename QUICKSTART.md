@@ -6,9 +6,38 @@
 
 ## 📝 前置要求
 
-- Android Studio Arctic Fox+
-- Kotlin 1.8+
-- Android SDK 23+
+### 必需环境
+
+- **Android Studio**: Meerkat | 2024.3.2 或更高版本 (推荐)
+- **JDK**: 17 (必须，不支持 JDK 11 或 JDK 21)
+- **Gradle**: 8.6.1 (必须)
+- **Android Gradle Plugin (AGP)**: 8.6.1
+- **Kotlin**: 2.0.0
+- **Android SDK**: 最低 API 23 (Android 6.0)
+
+### 版本说明
+
+| 组件 | 版本 | 必须/推荐 |
+|------|------|----------|
+| JDK | 17 | ✅ 必须 |
+| Gradle | 8.6.1 | ✅ 必须 |
+| AGP | 8.6.1 | ✅ 必须 |
+| Kotlin | 2.0.0 | ✅ 必须 |
+| Android Studio | Meerkat 2024.3.2+ | 👍 推荐 |
+| Min SDK | API 23 | ✅ 必须 |
+| Target SDK | API 34 | 👍 推荐 |
+
+### 如何检查版本
+
+```bash
+# 检查 Java 版本
+java -version
+# 应输出: java version "17.x.x"
+
+# 检查 Gradle 版本
+./gradlew --version
+# 应输出: Gradle 8.6.1
+```
 
 ---
 
@@ -447,6 +476,116 @@ class UserFragment : MviFragment<FragmentUserBinding, UserViewModel, UserIntent>
         UserViewModel::class.java
 
     // 其他方法与Activity一致
+}
+```
+
+### Q5: JDK 版本错误怎么办?
+
+**A**: 确保使用 JDK 17：
+
+```bash
+# 检查当前 Java 版本
+java -version
+
+# 如果不是 JDK 17，需要：
+# 1. 下载 JDK 17: https://www.oracle.com/java/technologies/downloads/#java17
+# 2. 在 Android Studio 中设置: File -> Project Structure -> SDK Location -> JDK location
+# 3. 在 gradle.properties 中添加: org.gradle.java.home=/path/to/jdk-17
+```
+
+### Q6: Gradle 版本不匹配?
+
+**A**: 检查 `gradle/wrapper/gradle-wrapper.properties`:
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.6.1-bin.zip
+```
+
+### Q7: 编译失败：Unsupported class file major version 61?
+
+**A**: 这是 JDK 版本问题，必须使用 JDK 17：
+- JDK 17 = class file version 61
+- JDK 11 = class file version 55 (不支持)
+- JDK 21 = class file version 65 (不支持)
+
+### Q8: 内存泄漏问题?
+
+**A**: 框架已经做了优化，但请注意：
+
+```kotlin
+// ✅ Dialog 使用后释放
+override fun onDestroy() {
+    super.onDestroy()
+    myDialog?.release()
+    myDialog = null
+}
+
+// ✅ DownloadManager 释放
+override fun onDestroy() {
+    super.onDestroy()
+    downloadManager.release()
+}
+
+// ✅ RecyclerView Adapter 使用 ListAdapter
+class MyAdapter : ListAdapter<Item, ViewHolder>(DiffCallback) {
+    override fun onViewRecycled(holder: ViewHolder) {
+        super.onViewRecycled(holder)
+        holder.unbind()  // 清理监听器
+    }
+}
+```
+
+---
+
+## 🔧 配置检查清单
+
+在开始开发前，请确保以下配置正确：
+
+- [ ] JDK 17 已安装并配置 (`java -version` 检查)
+- [ ] Gradle 8.6.1 配置正确 (`./gradlew --version` 检查)
+- [ ] Android Studio 为 Meerkat 2024.3.2 或更高版本
+- [ ] `build.gradle` 中 AGP 版本为 8.6.1
+- [ ] `build.gradle` 中 Kotlin 版本为 2.0.0
+- [ ] `gradle.properties` 中启用了 `android.useAndroidX=true`
+- [ ] Min SDK 设置为 23 或更高
+- [ ] 已添加必要的依赖项
+
+### 配置文件参考
+
+**gradle/wrapper/gradle-wrapper.properties**:
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.6.1-bin.zip
+```
+
+**build.gradle (Project)**:
+```gradle
+buildscript {
+    ext.kotlin_version = "2.0.0"
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.6.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+```
+
+**build.gradle (Module)**:
+```gradle
+android {
+    compileSdk 34
+    
+    defaultConfig {
+        minSdk 23
+        targetSdk 34
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 }
 ```
 

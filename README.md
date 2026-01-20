@@ -29,11 +29,12 @@
 
 ### 环境要求
 
-- Android Studio Hedgehog | 2023.1.1 或更高版本
-- JDK 17
-- Gradle 8.6+
-- Kotlin 2.0.0
-- Android SDK 23+
+- **Android Studio**: Meerkat | 2024.3.2 或更高版本 (推荐)
+- **JDK**: 17 (必须)
+- **Gradle**: 8.6.1 (必须)
+- **Kotlin**: 2.0.0
+- **Android Gradle Plugin (AGP)**: 8.6.1
+- **Android SDK**: 最低 API 23 (Android 6.0)，推荐 API 26+ (Android 8.0+)
 
 ### 安装
 

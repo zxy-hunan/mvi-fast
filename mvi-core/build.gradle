@@ -82,6 +82,8 @@ dependencies {
 
     api rootProject.ext.deps["RxTool-RxKit"]
 
+    debugApi rootProject.ext.deps["Di-dokit"]
+
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     api(rootProject.ext.deps["XXPermissions"]) {
         exclude group: 'com.android.support'

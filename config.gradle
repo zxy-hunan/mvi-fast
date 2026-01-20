@@ -1,125 +1,128 @@
 ext {
     versions = [
-            compileSdk        : 35,
-            buildTools        : "34.0.0",
-            minSdk            : 23,
-            targetSdk         : 35,
-            javaVersion       : JavaVersion.VERSION_17,
-            jvmTarget         : 17,
+            compileSdk : 35,
+            buildTools : "34.0.0",
+            minSdk     : 23,
+            targetSdk  : 35,
+            javaVersion: JavaVersion.VERSION_17,
+            jvmTarget  : 17,
     ]
 
     libs = [
             // Kotlin
-            kotlinStdlib              : "1.8.20",
-            coreKtx                   : "1.9.0",
+            kotlinStdlib          : "1.8.20",
+            coreKtx               : "1.9.0",
 
             // AndroidX
-            appcompat                 : "1.6.1",
-            lifecycle                 : "2.6.1",
-            constraintlayout          : "2.1.4",
-            recyclerview              : "1.3.0",
-            swiperefreshlayout        : "1.1.0",
-            material                  : "1.9.0",
+            appcompat             : "1.6.1",
+            lifecycle             : "2.6.1",
+            constraintlayout      : "2.1.4",
+            recyclerview          : "1.3.0",
+            swiperefreshlayout    : "1.1.0",
+            material              : "1.9.0",
 
             // Coroutines
-            coroutines                : "1.7.3",
+            coroutines            : "1.7.3",
 
             // Network
-            retrofit                  : "2.9.0",
-            okhttp                    : "4.11.0",
-            kotlinxSerialization      : "1.6.0",
+            retrofit              : "2.9.0",
+            okhttp                : "4.11.0",
+            kotlinxSerialization  : "1.6.0",
 
             // Storage
-            mmkv                      : "2.0.1",
-            mmkvKtx                   : "1.2.14",
+            mmkv                  : "2.0.1",
+            mmkvKtx               : "1.2.14",
 
             // Image
-            glide                     : "4.15.1",
+            glide                 : "4.15.1",
 
             // UI
-            viewbinding               : "2.1.0",
-            loadingStateView          : "5.0.0",
+            viewbinding           : "2.1.0",
+            loadingStateView      : "5.0.0",
 
             // Utils
-            gson                      : "2.10",
-            utilcodex                 : "1.31.1",
+            gson                  : "2.10",
+            utilcodex             : "1.31.1",
 
             /// Layer
-            layerVersion              : "1.0.7",
+            layerVersion          : "1.0.7",
 
             //屏幕适配 自带混淆
-            androidAutoSizeVersion    : "v1.2.1",
+            androidAutoSizeVersion: "v1.2.1",
 
             // 权限
-            XXPermissionsVersion      : "16.2",
+            XXPermissionsVersion  : "16.2",
 
-            shapeViewVersion          : "8.5",
+            shapeViewVersion      : "8.5",
 
-            bannerVersion             : "2.2.3",
+            bannerVersion         : "2.2.3",
 
             //工具类
-            RxToolRxKitVersion        : "2.6.2",
+            RxToolRxKitVersion    : "2.6.2",
+
+            dokitxVersion         : "3.7.11",
     ]
 
     deps = [
             // Kotlin
-            "kotlin-stdlib"           : "org.jetbrains.kotlin:kotlin-stdlib:${libs.kotlinStdlib}",
-            "core-ktx"                : "androidx.core:core-ktx:${libs.coreKtx}",
+            "kotlin-stdlib"          : "org.jetbrains.kotlin:kotlin-stdlib:${libs.kotlinStdlib}",
+            "core-ktx"               : "androidx.core:core-ktx:${libs.coreKtx}",
 
             // AndroidX
-            "appcompat"               : "androidx.appcompat:appcompat:${libs.appcompat}",
-            "lifecycle-process"       : "androidx.lifecycle:lifecycle-process:${libs.lifecycle}",
-            "lifecycle-viewmodel-ktx" : "androidx.lifecycle:lifecycle-viewmodel-ktx:${libs.lifecycle}",
-            "lifecycle-runtime-ktx"   : "androidx.lifecycle:lifecycle-runtime-ktx:${libs.lifecycle}",
-            "constraintlayout"        : "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}",
-            "recyclerview"            : "androidx.recyclerview:recyclerview:${libs.recyclerview}",
-            "swiperefreshlayout"      : "androidx.swiperefreshlayout:swiperefreshlayout:${libs.swiperefreshlayout}",
-            "material"                : "com.google.android.material:material:${libs.material}",
+            "appcompat"              : "androidx.appcompat:appcompat:${libs.appcompat}",
+            "lifecycle-process"      : "androidx.lifecycle:lifecycle-process:${libs.lifecycle}",
+            "lifecycle-viewmodel-ktx": "androidx.lifecycle:lifecycle-viewmodel-ktx:${libs.lifecycle}",
+            "lifecycle-runtime-ktx"  : "androidx.lifecycle:lifecycle-runtime-ktx:${libs.lifecycle}",
+            "constraintlayout"       : "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}",
+            "recyclerview"           : "androidx.recyclerview:recyclerview:${libs.recyclerview}",
+            "swiperefreshlayout"     : "androidx.swiperefreshlayout:swiperefreshlayout:${libs.swiperefreshlayout}",
+            "material"               : "com.google.android.material:material:${libs.material}",
 
             // Coroutines
-            "coroutines-core"         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.coroutines}",
-            "coroutines-android"      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libs.coroutines}",
+            "coroutines-core"        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libs.coroutines}",
+            "coroutines-android"     : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libs.coroutines}",
 
             // Network
-            "retrofit"                : "com.squareup.retrofit2:retrofit:${libs.retrofit}",
-            "retrofit-gson"           : "com.squareup.retrofit2:converter-gson:${libs.retrofit}",
-            "okhttp-bom"              : "com.squareup.okhttp3:okhttp-bom:${libs.okhttp}",
-            "okhttp"                  : "com.squareup.okhttp3:okhttp",
-            "okhttp-logging"          : "com.squareup.okhttp3:logging-interceptor",
-            "kotlinx-serialization"   : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libs.kotlinxSerialization}",
+            "retrofit"               : "com.squareup.retrofit2:retrofit:${libs.retrofit}",
+            "retrofit-gson"          : "com.squareup.retrofit2:converter-gson:${libs.retrofit}",
+            "okhttp-bom"             : "com.squareup.okhttp3:okhttp-bom:${libs.okhttp}",
+            "okhttp"                 : "com.squareup.okhttp3:okhttp",
+            "okhttp-logging"         : "com.squareup.okhttp3:logging-interceptor",
+            "kotlinx-serialization"  : "org.jetbrains.kotlinx:kotlinx-serialization-json:${libs.kotlinxSerialization}",
 
             // Storage
-            "mmkv"                    : "com.tencent:mmkv-static:${libs.mmkv}",
-            "mmkv-ktx"                : "com.github.DylanCaiCoding:MMKV-KTX:${libs.mmkvKtx}",
+            "mmkv"                   : "com.tencent:mmkv-static:${libs.mmkv}",
+            "mmkv-ktx"               : "com.github.DylanCaiCoding:MMKV-KTX:${libs.mmkvKtx}",
 
             // Image
-            "glide"                   : "com.github.bumptech.glide:glide:${libs.glide}",
-            "glide-compiler"          : "com.github.bumptech.glide:compiler:${libs.glide}",
+            "glide"                  : "com.github.bumptech.glide:glide:${libs.glide}",
+            "glide-compiler"         : "com.github.bumptech.glide:compiler:${libs.glide}",
 
             // UI
-            "viewbinding-ktx"         : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:${libs.viewbinding}",
-            "viewbinding-base"        : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:${libs.viewbinding}",
-            "loading-state-view"      : "com.github.DylanCaiCoding.LoadingStateView:loadingstateview-ktx:${libs.loadingStateView}",
+            "viewbinding-ktx"        : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:${libs.viewbinding}",
+            "viewbinding-base"       : "com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-base:${libs.viewbinding}",
+            "loading-state-view"     : "com.github.DylanCaiCoding.LoadingStateView:loadingstateview-ktx:${libs.loadingStateView}",
 
             // Utils
-            "gson"                    : "com.google.code.gson:gson:${libs.gson}",
-            "utilcodex"               : "com.blankj:utilcodex:${libs.utilcodex}",
+            "gson"                   : "com.google.code.gson:gson:${libs.gson}",
+            "utilcodex"              : "com.blankj:utilcodex:${libs.utilcodex}",
 
             /// Layer
-            "layer"                   : "com.github.goweii:Layer:${libs.layerVersion}",
+            "layer"                  : "com.github.goweii:Layer:${libs.layerVersion}",
 
             /// 屏幕适配
-            "autosize"                : "com.github.JessYanCoding:AndroidAutoSize:${libs.androidAutoSizeVersion}",
+            "autosize"               : "com.github.JessYanCoding:AndroidAutoSize:${libs.androidAutoSizeVersion}",
 
             // 权限请求框架：https://github.com/getActivity/XXPermissions
-            "XXPermissions"           : "com.github.getActivity:XXPermissions:${libs.XXPermissionsVersion}",
+            "XXPermissions"          : "com.github.getActivity:XXPermissions:${libs.XXPermissionsVersion}",
 
-            "ShapeView"               : "com.github.getActivity:ShapeView:${libs["shapeViewVersion"]}",
+            "ShapeView"              : "com.github.getActivity:ShapeView:${libs["shapeViewVersion"]}",
 
-            "BannerView"              : "io.github.youth5201314:banner:${libs["bannerVersion"]}",
+            "BannerView"             : "io.github.youth5201314:banner:${libs["bannerVersion"]}",
 
-            "RxTool-RxKit"            : "com.github.tamsiree.RxTool:RxKit:${libs["RxToolRxKitVersion"]}",
+            "RxTool-RxKit"           : "com.github.tamsiree.RxTool:RxKit:${libs["RxToolRxKitVersion"]}",
 
+            "Di-dokit"               : "io.github.didi.dokit:dokitx:${libs["dokitxVersion"]}"
 
     ]
 }
