@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/simpleFragment"
+        android:icon="@drawable/ic_list"
+        android:title="简单列表" />
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="首页布局" />
+    <item
+        android:id="@+id/homeListFragment"
+        android:icon="@drawable/ic_home_list"
+        android:title="首页列表" />
+    <item
+        android:id="@+id/commentFragment"
+        android:icon="@drawable/ic_comment"
+        android:title="哔哩哔哩评论" />
+    <item
+        android:id="@+id/douyinCommentFragment"
+        android:icon="@drawable/ic_comment"
+        android:title="抖音评论" />
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/ic_chat"
+        android:title="聊天列表" />
+    <item
+        android:id="@+id/letterIndexFragment"
+        android:icon="@drawable/ic_letter_index"
+        android:title="字母索引" />
+    <item
+        android:id="@+id/nav_group.xml"
+        android:icon="@drawable/ic_group"
+        android:title="分组" />
+    <item
+        android:id="@+id/nestedListFragment"
+        android:icon="@drawable/ic_nested_list"
+        android:title="嵌套列表" />
+    <item
+        android:id="@+id/nav_hover_header.xml"
+        android:icon="@drawable/ic_hover_header"
+        android:title="悬停" />
+    <item
+        android:id="@+id/nav_divider.xml"
+        android:icon="@drawable/ic_tree_structure"
+        android:title="分割线" />
+    <item
+        android:id="@+id/pushRefreshFragment"
+        android:icon="@drawable/ic_push_refresh"
+        android:title="下拉刷新" />
+    <item
+        android:id="@+id/pullRefreshFragment"
+        android:icon="@drawable/ic_refresh"
+        android:title="下拉/上拉加载" />
+    <item
+        android:id="@+id/differDataChangeFragment"
+        android:icon="@drawable/ic_differ_data_change"
+        android:title="对比数据变化" />
+    <item
+        android:id="@+id/listAnimationFragment"
+        android:icon="@drawable/ic_list"
+        android:title="列表动画" />
+    <item
+        android:id="@+id/multiTypeFragment"
+        android:icon="@drawable/ic_multi_type"
+        android:title="多类型" />
+    <item
+        android:id="@+id/oneMoreTypeFragment"
+        android:icon="@drawable/ic_one_more"
+        android:title="一对多" />
+    <item
+        android:id="@+id/headerFooterFragment"
+        android:icon="@drawable/ic_head_footer"
+        android:title="头|脚布局" />
+    <item
+        android:id="@+id/checkModeFragment"
+        android:icon="@drawable/ic_check_mode"
+        android:title="选择模式" />
+    <item
+        android:id="@+id/flexBoxFragment"
+        android:icon="@drawable/ic_flex_box"
+        android:title="伸缩布局" />
+    <item
+        android:id="@+id/swipeFragment"
+        android:icon="@drawable/ic_swipe"
+        android:title="侧滑" />
+    <item
+        android:id="@+id/dragFragment"
+        android:icon="@drawable/ic_touch"
+        android:title="拖拽" />
+    <item
+        android:id="@+id/stateLayoutFragment"
+        android:icon="@drawable/ic_state"
+        android:title="缺省状态" />
+    <item
+        android:id="@+id/pagePartStateFragment"
+        android:icon="@drawable/ic_refresh"
+        android:title="列表局部缺省页" />
+    <item
+        android:id="@+id/skeletonFragment"
+        android:icon="@drawable/ic_state"
+        android:title="骨骼动画" />
+    <item
+        android:id="@+id/preloadFragment"
+        android:icon="@drawable/ic_preload"
+        android:title="预加载" />
+    <item
+        android:id="@+id/upFetchFragment"
+        android:icon="@drawable/ic_up_fetch"
+        android:title="预拉取" />
+    <item
+        android:id="@+id/interfaceFragment"
+        android:icon="@drawable/ic_list"
+        android:title="接口类型绑定" />
+    <item
+        android:id="@+id/coordinatorLayoutFragment"
+        android:icon="@drawable/ic_up_fetch"
+        android:title="CoordinatorLayout" />
+    <item
+        android:id="@+id/viewBindingFragment"
+        android:icon="@drawable/ic_view_binding"
+        android:title="ViewBinding" />
+</menu>

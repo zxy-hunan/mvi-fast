@@ -57,6 +57,8 @@ dependencies {
     // BannerView (mvi-core 中没有)
     api "io.github.youth5201314:banner:2.2.3"
 
+    // BannerView (mvi-core 中没有)
+    api rootProject.ext.deps["Brv-kit"]
 
 
 

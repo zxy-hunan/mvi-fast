@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main.xml"
+    app:startDestination="@id/simpleFragment">
+    <fragment
+        android:id="@+id/listAnimationFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ListAnimationFragment"
+        android:label="列表动画"
+        tools:layout="@layout/fragment_list_animation" />
+    <fragment
+        android:id="@+id/multiTypeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.MultiTypeFragment"
+        android:label="多类型"
+        tools:layout="@layout/fragment_multi_type" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.home.HomeFragment"
+        android:label="首页布局"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.drake.brv.sample.ui.fragment.home.HomeListFragment"
+        android:label="首页列表"
+        tools:layout="@layout/fragment_home_list" />
+    <fragment
+        android:id="@+id/nestedListFragment"
+        android:name="com.drake.brv.sample.ui.fragment.NestedListFragment"
+        android:label="嵌套列表"
+        tools:layout="@layout/fragment_nested_list" />
+    <fragment
+        android:id="@+id/checkModeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CheckModeFragment"
+        android:label="选择模式"
+        tools:layout="@layout/fragment_check_mode" />
+    <fragment
+        android:id="@+id/stateLayoutFragment"
+        android:name="com.drake.brv.sample.ui.fragment.StateLayoutFragment"
+        android:label="缺省状态"
+        tools:layout="@layout/fragment_state_layout" />
+    <fragment
+        android:id="@+id/swipeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.SwipeFragment"
+        android:label="侧滑"
+        tools:layout="@layout/fragment_swipe" />
+    <fragment
+        android:id="@+id/oneMoreTypeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.OneMoreTypeFragment"
+        android:label="一对多"
+        tools:layout="@layout/fragment_one_more_type" />
+    <fragment
+        android:id="@+id/flexBoxFragment"
+        android:name="com.drake.brv.sample.ui.fragment.FlexBoxFragment"
+        android:label="伸缩布局"
+        tools:layout="@layout/fragment_flex_box" />
+    <fragment
+        android:id="@+id/headerFooterFragment"
+        android:name="com.drake.brv.sample.ui.fragment.HeaderFooterFragment"
+        android:label="头|脚布局"
+        tools:layout="@layout/fragment_header_footer" />
+    <fragment
+        android:id="@+id/groupGridFragment"
+        android:name="com.drake.brv.sample.ui.fragment.group.GroupGridFragment"
+        android:label="分组"
+        tools:layout="@layout/fragment_group" />
+    <fragment
+        android:id="@+id/pushRefreshFragment"
+        android:label="下拉刷新"
+        android:name="com.drake.brv.sample.ui.fragment.PushRefreshFragment"
+        tools:layout="@layout/fragment_push_refresh" />
+    <fragment
+        android:id="@+id/pullRefreshFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PullRefreshFragment"
+        android:label="下拉/上拉加载"
+        tools:layout="@layout/fragment_pull_refresh" />
+    <fragment
+        android:id="@+id/pagePartStateFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PagePartStateFragment"
+        android:label="列表局部缺省页"
+        tools:layout="@layout/fragment_pull_refresh" />
+    <fragment
+        android:id="@+id/preloadFragment"
+        android:name="com.drake.brv.sample.ui.fragment.PreloadFragment"
+        android:label="预加载"
+        tools:layout="@layout/fragment_preload" />
+    <fragment
+        android:id="@+id/upFetchFragment"
+        android:name="com.drake.brv.sample.ui.fragment.UpFetchFragment"
+        android:label="预拉取"
+        tools:layout="@layout/fragment_up_fetch" />
+    <fragment
+        android:id="@+id/simpleFragment"
+        android:name="com.drake.brv.sample.ui.fragment.SimpleFragment"
+        android:label="简单列表"
+        tools:layout="@layout/fragment_simple" />
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CommentFragment"
+        android:label="哔哩哔哩评论" />
+    <fragment
+        android:id="@+id/interfaceFragment"
+        android:name="com.drake.brv.sample.ui.fragment.InterfaceFragment"
+        android:label="接口类型绑定"
+        tools:layout="@layout/fragment_interface" />
+
+    <include app:graph="@navigation/nav_divider" />
+
+    <include app:graph="@navigation/nav_hover" />
+
+    <fragment
+        android:id="@+id/dragFragment"
+        android:name="com.drake.brv.sample.ui.fragment.DragFragment"
+        android:label="拖拽"
+        tools:layout="@layout/fragment_drag" />
+    <fragment
+        android:id="@+id/coordinatorLayoutFragment"
+        android:name="com.drake.brv.sample.ui.fragment.CoordinatorLayoutFragment"
+        android:label="CoordinatorLayout" />
+    <fragment
+        android:id="@+id/viewBindingFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ViewBindingFragment"
+        android:label="ViewBinding" />
+    <fragment
+        android:id="@+id/differDataChangeFragment"
+        android:name="com.drake.brv.sample.ui.fragment.DifferDataChangeFragment"
+        android:label="对比数据变化" />
+    <include app:graph="@navigation/nav_group" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.drake.brv.sample.ui.fragment.ChatFragment"
+        android:label="聊天列表" />
+    <fragment
+        android:id="@+id/skeletonFragment"
+        android:name="com.drake.brv.sample.ui.fragment.SkeletonFragment"
+        android:label="骨骼动画" />
+    <fragment
+        android:id="@+id/douyinCommentFragment"
+        android:name="com.drake.brv.sample.ui.fragment.DouyinCommentFragment"
+        android:label="抖音评论" />
+    <fragment
+        android:id="@+id/letterIndexFragment"
+        android:name="com.drake.brv.sample.ui.fragment.LetterIndexFragment"
+        android:label="字母索引" />
+
+</navigation>

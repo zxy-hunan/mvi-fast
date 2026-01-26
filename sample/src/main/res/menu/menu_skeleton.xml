@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_loading"
+        android:title="缺省页-骨骼动画" />
+    <item
+        android:id="@+id/menu_content"
+        android:title="缺省页-成功" />
+    <item
+        android:id="@+id/menu_error"
+        android:title="缺省页-错误" />
+    <item
+        android:id="@+id/menu_empty"
+        android:title="缺省页-空数据" />
+</menu>

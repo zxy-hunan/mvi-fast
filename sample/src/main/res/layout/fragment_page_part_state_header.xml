@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:text="缺省页不会覆盖Header"
+            android:textColor="@color/textSecond"
+            android:textSize="12dp" />
+
+        <com.drake.brv.PageRefreshLayout
+            android:id="@+id/page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:page_rv="@id/rv"
+            app:page_state="@id/state">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:text="HEADER"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_scrollFlags="scroll" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <com.drake.statelayout.StateLayout
+                    android:id="@+id/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.drake.statelayout.StateLayout>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </com.drake.brv.PageRefreshLayout>
+
+    </LinearLayout>
+</layout>

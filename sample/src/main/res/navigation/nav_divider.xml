@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_divider.xml"
+    app:startDestination="@id/linearHorizontalFragment">
+
+    <fragment
+        android:id="@+id/linearHorizontalFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.LinearHorizontalDividerFragment"
+        android:label="线性列表-水平分割线"
+        tools:layout="@layout/fragment_linear_horizontal_divider" />
+    <fragment
+        android:id="@+id/linearHorizontalMarginFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.LinearHorizontalDividerMarginFragment"
+        android:label="线性列表-水平分割线-间隔"
+        tools:layout="@layout/fragment_linear_horizontal_divider" />
+    <fragment
+        android:id="@+id/gridDividerVerticalFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerVerticalFragment"
+        android:label="网格列表-网格分割线-垂直"
+        tools:layout="@layout/fragment_grid_divider" />
+    <fragment
+        android:id="@+id/gridDividerHorizontalFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridDividerHorizontalFragment"
+        android:label="网格列表-网格分割线-水平"
+        tools:layout="@layout/fragment_grid_divider" />
+    <fragment
+        android:id="@+id/gridHorizontalDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridHorizontalDividerFragment"
+        android:label="网格列表-水平分割线"
+        tools:layout="@layout/fragment_grid_horizontal_divider" />
+    <fragment
+        android:id="@+id/gridVerticalDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridVerticalDividerFragment"
+        android:label="网格列表-垂直分割线"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerFragment"
+        android:label="网格列表-网格分割线-间隔a"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerBFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerBFragment"
+        android:label="网格列表-网格分割线-间隔b"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/gridMarginDividerCFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.GridMarginDividerCFragment"
+        android:label="网格列表-网格分割线-间隔c"
+        tools:layout="@layout/fragment_grid_vertical_divider" />
+    <fragment
+        android:id="@+id/linearVerticalDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.LinearVerticalDividerFragment"
+        android:label="线性列表-垂直分割线"
+        tools:layout="@layout/fragment_linear_vertical_divider" />
+    <fragment
+        android:id="@+id/staggeredDividerFragment"
+        android:name="com.drake.brv.sample.ui.fragment.divider.StaggeredDividerFragment"
+        android:label="交错列表-网格分割线"
+        tools:layout="@layout/fragment_staggered_divider" />
+
+</navigation>

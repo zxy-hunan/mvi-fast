@@ -61,6 +61,8 @@ ext {
             RxToolRxKitVersion    : "2.6.2",
 
             dokitxVersion         : "3.7.11",
+
+            brvVersion            : "1.6.1"
     ]
 
     deps = [
@@ -122,7 +124,10 @@ ext {
 
             "RxTool-RxKit"           : "com.github.tamsiree.RxTool:RxKit:${libs["RxToolRxKitVersion"]}",
 
-            "Di-dokit"               : "io.github.didi.dokit:dokitx:${libs["dokitxVersion"]}"
+            "Di-dokit"               : "io.github.didi.dokit:dokitx:${libs["dokitxVersion"]}",
+
+            "Brv-kit"               : "com.github.liangjingkanji:BRV:${libs["brvVersion"]}"
+
 
     ]
 }
