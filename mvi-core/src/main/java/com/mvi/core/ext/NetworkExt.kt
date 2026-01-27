@@ -6,6 +6,7 @@ import com.mvi.core.base.UiState
 import com.mvi.core.network.ApiException
 import com.mvi.core.network.ApiResponse
 import com.mvi.core.network.ExceptionHandle.handleException
+import com.mvi.core.network.ExceptionHandle.isNetworkError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

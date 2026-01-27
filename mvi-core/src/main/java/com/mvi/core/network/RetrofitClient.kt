@@ -1,8 +1,6 @@
 package com.mvi.core.network
 
 import com.google.gson.Gson
-import com.mvi.core.R
-import com.mvi.core.base.MviApplication
 import com.mvi.core.network.interceptor.DataInterceptor
 import com.mvi.core.network.interceptor.HeaderInterceptor
 import com.mvi.core.network.interceptor.LoggingInterceptor
@@ -19,10 +17,15 @@ import java.util.concurrent.TimeUnit
  * 1. 单例模式管理Retrofit实例
  * 2. DSL风格配置
  * 3. 简化的初始化流程
+ * 4. 不依赖Application实例，提高灵活性
  */
 object RetrofitClient {
 
     private const val DEFAULT_TIMEOUT = 30L
+
+    // 默认错误消息（不再依赖Context）
+    private const val ERROR_NOT_INITIALIZED = "Please call RetrofitClient.init() first"
+    private const val ERROR_BASEURL_REQUIRED = "baseUrl cannot be empty"
 
     private var baseUrl: String = ""
     private var okHttpClient: OkHttpClient? = null
@@ -41,10 +44,11 @@ object RetrofitClient {
      * 创建API服务
      */
     fun <T> create(service: Class<T>): T {
-        checkNotNull(retrofit) {
-            MviApplication.instance.getString(R.string.retrofit_init_required)
+        val retrofitInstance = retrofit
+        checkNotNull(retrofitInstance) {
+            ERROR_NOT_INITIALIZED
         }
-        return retrofit!!.create(service)
+        return retrofitInstance.create(service)
     }
 
     /**
@@ -62,7 +66,7 @@ object RetrofitClient {
 
         fun build() {
             require(baseUrl.isNotEmpty()) {
-                MviApplication.instance.getString(R.string.retrofit_baseurl_required)
+                ERROR_BASEURL_REQUIRED
             }
 
             RetrofitClient.baseUrl = baseUrl
@@ -93,14 +97,17 @@ object RetrofitClient {
                 okHttpBuilder.addInterceptor(interceptor)
             }
 
-            RetrofitClient.okHttpClient = okHttpBuilder.build()
+            val okHttpClient = okHttpBuilder.build()
+            RetrofitClient.okHttpClient = okHttpClient
 
             // 构建Retrofit
-            RetrofitClient.retrofit = Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .client(RetrofitClient.okHttpClient!!)
+                .client(okHttpClient)  // 空安全：使用局部变量
                 .addConverterFactory(GsonConverterFactory.create(Gson()))
                 .build()
+
+            RetrofitClient.retrofit = retrofit
         }
     }
 }

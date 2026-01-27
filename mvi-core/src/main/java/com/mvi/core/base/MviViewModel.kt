@@ -26,10 +26,11 @@ abstract class MviViewModel<I : MviIntent> : ViewModel() {
     /**
      * Intent流 - 接收用户操作
      * 使用 DROP_OLDEST 策略防止积压，提升性能
+     * 注意：BufferOverflow 在某些 Kotlin 版本中可能不可用
      */
     private val _intent = MutableSharedFlow<I>(
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
+        replay = 0,
+        extraBufferCapacity = 1
     )
     
     /**

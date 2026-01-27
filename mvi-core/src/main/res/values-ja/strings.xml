@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Network Exceptions - Japanese -->
+    <string name="error_network_connection">ネットワーク接続に失敗しました。ネットワーク設定を確認してください</string>
+    <string name="error_network_timeout">ネットワーク接続がタイムアウトしました。後でもう一度お試しください</string>
+    <string name="error_socket_exception">ネットワーク接続例外</string>
+
+    <!-- HTTP Status Codes - Japanese -->
+    <string name="error_http_unauthorized">承認されていません。再度ログインしてください</string>
+    <string name="error_http_forbidden">アクセスが拒否されました</string>
+    <string name="error_http_not_found">リソースが見つかりません</string>
+    <string name="error_http_timeout">リクエストがタイムアウトしました。後でもう一度お試しください</string>
+    <string name="error_http_internal_error">サーバー内部エラー</string>
+    <string name="error_http_bad_gateway">ゲートウェイエラー</string>
+    <string name="error_http_unavailable">サービスは利用できません。後でもう一度お試しください</string>
+    <string name="error_http_gateway_timeout">ゲートウェイタイムアウト</string>
+    <string name="error_http_unknown">HTTP エラー (%d)</string>
+
+    <!-- Data Parsing - Japanese -->
+    <string name="error_json_parse">データの解析に失敗しました</string>
+
+    <!-- IO Exception - Japanese -->
+    <string name="error_io_exception">IO 例外</string>
+
+    <!-- Other Exceptions - Japanese -->
+    <string name="error_null_pointer">ヌルポインター例外</string>
+    <string name="error_index_out_of_bounds">インデックス範囲外例外</string>
+    <string name="error_class_cast">クラスキャスト例外</string>
+    <string name="error_array_store">配列格納例外</string>
+    <string name="error_illegal_argument">無効なパラメータ</string>
+    <string name="error_unknown">未知のエラー</string>
+</resources>

@@ -68,4 +68,9 @@ object ErrorStatus {
      * 服务提示信息
      */
     const val SERVICE_TIPS = 1012
+
+    /**
+     * 自定义错误（用于自定义错误消息）
+     */
+    const val CUSTOM_ERROR = 1013
 }
